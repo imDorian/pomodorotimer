@@ -447,10 +447,11 @@
     position: fixed;
     align-items: center;
     justify-content: center;
-    top: 27%;
+    top: 40%;
     left: 50%;
     padding: 10px;
     width: 90vw;
+    height: fit-content;
     /* height: 50%; */
     transform: translate(-50%, -50%);
     .quit-container {
@@ -471,7 +472,7 @@
     form {
       display: flex;
       width: 100%;
-      height: 100%;
+      /* height: 100%; */
       flex-direction: column;
       align-items: center;
       padding: 10px;
@@ -541,10 +542,6 @@
         }
       }
     }
-    &::backdrop {
-      /* background-color: transparent ; */
-      /* mix-blend-mode: difference; */
-    }
   }
   @media screen and (min-width: 900px) {
     main {
@@ -592,14 +589,14 @@
     longBreak: 'LONG_BREAK'
   }
   let times = {
-    pomodoro: 0,
-    shortBreak: 0,
-    longBreak: 0
+    pomodoro: 25,
+    shortBreak: 5,
+    longBreak: 20
   }
   let timer;
   let timeMode = MODES.pomodoro
-  let min = 0;
-  let sec = 4;
+  let min = 25;
+  let sec = 0;
   let autoStart = true
   let isRunning;
   let checked = []
