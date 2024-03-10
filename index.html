@@ -737,19 +737,19 @@
   longBreak_pomodoros.addEventListener('click', (e) => {
     longBreakPomodoros = e.target.value
   })
-  timer_pomodoro.addEventListener('click', (e) => {
+  timer_pomodoro.addEventListener('input', (e) => {
     times.pomodoro = e.target.value
     if (timeMode === MODES.pomodoro) {
       selectMode(MODES.pomodoro)
     }
   })
-  timer_shortBreak.addEventListener('click', (e) => {
+  timer_shortBreak.addEventListener('input', (e) => {
     times.shortBreak = e.target.value
     if (timeMode === MODES.shortBreak) {
       selectMode(MODES.shortBreak)
     }
   })
-  timer_longBreak.addEventListener('click', (e) => {
+  timer_longBreak.addEventListener('input', (e) => {
     times.longBreak = e.target.value
     if (timeMode === MODES.longBreak) {
       selectMode(MODES.longBreak)
