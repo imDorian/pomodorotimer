@@ -10,8 +10,9 @@
     <header>
       <nav>
         <h1>Pomodoro Timer</h1>
-        <div>
-          <button id="settings-btn">Settings</button>
+        <div id="nav-btns--container">
+          <button id="settings-btn"><span>Settings</span><img src="/Public/settings.svg" alt="settings"></button>
+          <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button>
           <dialog id="settings-modal">
             <div class="quit-container">
               <button id="quit-modal--btn"><img src="/Public/x.svg" alt=""></button>
@@ -23,8 +24,20 @@
                 <span>Autostart</span>
                 <input class="checkbox-input" checked value="autostart" type="checkbox" id="autostart">
               </label>
+              <label for="timer-pomodoro">
+                <span>Pomodoro minutes</span>
+                <input class="number-input" value="25" type="number" id="timer-pomodoro">
+              </label>
+              <label for="timer-shortBreak">
+                <span>Short break minutes</span>
+                <input class="number-input" value="5" type="number" id="timer-shortBreak">
+              </label>
+              <label for="timer-longBreak">
+                <span>Long break minutes</span>
+                <input class="number-input" value="20" type="number" id="timer-longBreak">
+              </label>
               <label for="long-break--pomodoros">
-                <span>Long break pomodoros</span>
+                <span>Long break interval</span>
                 <input class="number-input" value="4" type="number" id="long-break--pomodoros">
               </label>
             </div>
@@ -44,7 +57,6 @@
             </div>
             </form>
           </dialog>
-          <button>Profile</button>
         </div>
       </nav>
     </header>
@@ -102,7 +114,7 @@
     border: none;
     cursor: pointer;
     background-color: transparent;
-    transition: all 250ms;
+    transition: all 300ms;
     color: #3F5468;
     border-bottom: 1px solid #3F5468;
     font-size: 16px;
@@ -110,12 +122,12 @@
     &:hover {
         background-color: #3F5468;
         color: #F0F3F5;
-        border-radius: 6px;
+        /* border-radius: 6px; */
     }
     &:active {
         /* background-color: #3F5468; */
-        color: #F0F3F5;
-        border-radius: 12px;
+        /* color: #F0F3F5; */
+        border-radius: 6px;
         
     }
   }
@@ -140,29 +152,49 @@
     & nav {
       display: flex;
       flex-direction: row;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-around;
       width: 100%;
       height: 70px;
       padding: 10px ;
+
+      /* div {
+        display: flex;
+        flex-direction: column;
+      } */
+      #nav-btns--container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
       
       & button {
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 600;
         color: #3F5468;
         border: #3F5468 solid 1px;
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        padding-inline: 8px;
+        span {
+          display: none;
+        }
         &:hover {
-          background-color: #3F5468;
+          background-color: #B8E4C9;
+          color: #3F5468;
         }
       }
     }
-    &::after {
+    /* &::after {
       content: "";
       background-color: #3F5468;
       width: 90%;
       height: 1px;
       display: block;
-    }
+    } */
   }
 
   body {
@@ -447,10 +479,10 @@
     position: fixed;
     align-items: center;
     justify-content: center;
-    top: 40%;
+    top: 50%;
     left: 50%;
-    padding: 10px;
-    width: 90vw;
+    padding: 15px;
+    width: 25rem;
     height: fit-content;
     /* height: 50%; */
     transform: translate(-50%, -50%);
@@ -492,7 +524,7 @@
           width: 100%;
           height: 1px;
           background-color: #3F5468;
-          margin-block: 7px;
+          margin-block: 20px;
         }
       }
       label {
@@ -513,6 +545,7 @@
           outline: none ;
           text-align: center;
           font-size: 20px;
+          color: #3F5468;
           &:focus {
             background-color: #B8E4C9;
           }
@@ -556,10 +589,29 @@
     }
     #settings-modal {
       /* position: absolute; */
-      width:30%;
-      left: 70%;
+      /* width:30rem; */
     }
 
+  }
+  @media screen and (min-width: 500px) {
+    header::after {
+      content: '';
+      height: 1px;
+      width: 90%;
+      background-color: #3F5468;
+    }
+    nav {
+      div {
+        button {
+          span {
+            display: inline-block;
+          }
+        }
+      }
+      &::after {
+        background-color: transparent;
+      }
+    }
   }
 </style>
 
@@ -581,6 +633,9 @@
   const autoStart_btn = document.querySelector('#autostart')
   const quitModal_btn = document.querySelector('#quit-modal--btn')
   const longBreak_pomodoros = document.querySelector('#long-break--pomodoros')
+  const timer_pomodoro = document.querySelector('#timer-pomodoro')
+  const timer_shortBreak = document.querySelector('#timer-shortBreak')
+  const timer_longBreak = document.querySelector('#timer-longBreak')
 
 
   const MODES = {
@@ -595,7 +650,7 @@
   }
   let timer;
   let timeMode = MODES.pomodoro
-  let min = 25;
+  let min = times.pomodoro;
   let sec = 0;
   let autoStart = true
   let isRunning;
@@ -682,7 +737,24 @@
   longBreak_pomodoros.addEventListener('click', (e) => {
     longBreakPomodoros = e.target.value
   })
-
+  timer_pomodoro.addEventListener('click', (e) => {
+    times.pomodoro = e.target.value
+    if (timeMode === MODES.pomodoro) {
+      selectMode(MODES.pomodoro)
+    }
+  })
+  timer_shortBreak.addEventListener('click', (e) => {
+    times.shortBreak = e.target.value
+    if (timeMode === MODES.shortBreak) {
+      selectMode(MODES.shortBreak)
+    }
+  })
+  timer_longBreak.addEventListener('click', (e) => {
+    times.longBreak = e.target.value
+    if (timeMode === MODES.longBreak) {
+      selectMode(MODES.longBreak)
+    }
+  })
 
 
 
