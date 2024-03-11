@@ -62,14 +62,13 @@
     </header>
     <main>
       <article class='timer-container'>
-          <div>
-            <button id="pomodoro" class="active" onclick="selectMode('POMODORO')">Pomodoro</button>
-            <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Short Break</button>
-            <button id="longBreak" onclick="selectMode('LONG_BREAK')">Long Break</button>
+          <div id="modes-container">
+            <button id="pomodoro" class="active" onclick="selectMode('POMODORO')">Pomodoro 0</button>
+            <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Short Break 0</button>
+            <button id="longBreak" onclick="selectMode('LONG_BREAK')">Long Break 0</button>
           </div>
-          <div>
+          <div id="time-container">
             <span id='timer'>25:00</span>
-            <span>Pomodoros #<span id="pomodoros">0</span></span>
           </div>
           <div id="play-reset--container">
             <button id='play-timer' onclick="startTimer()">Start</button>
@@ -109,26 +108,20 @@
     padding: 0;
   }
   button {
-    border-radius: 0px;
+    border-radius: 20px;
     padding: 10px;
     border: none;
     cursor: pointer;
     background-color: transparent;
     transition: all 300ms;
     color: #3F5468;
-    border-bottom: 1px solid #3F5468;
+    /* border-bottom: 1px solid #3F5468; */
     font-size: 16px;
     font-weight: 600;
     &:hover {
         background-color: #3F5468;
         color: #F0F3F5;
         /* border-radius: 6px; */
-    }
-    &:active {
-        /* background-color: #3F5468; */
-        /* color: #F0F3F5; */
-        border-radius: 6px;
-        
     }
   }
 
@@ -248,7 +241,8 @@
   
   .timer-container {
     flex-direction: column;
-    gap: 50px;
+    justify-content: space-around;
+    /* gap: 50px; */
     & div {
         display: flex;
         flex-direction: row;
@@ -366,16 +360,36 @@
   
 
   #play-reset--container {
-    /* background-color: #F6F5F5; */
-    /* color: #42291C; */
+    /* display: flex; */
+    /* flex-direction: column; */
     & button {
       width: 50%;
-      border: 1px solid #3F5468;
-      border-radius: 12px;
+      /* border: 1px solid #3F5468; */
+      border-radius: 20px;
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: large;
+      box-shadow: 0 0 20px -20px black;
+      transition: all 300ms;
+      &:hover {
+        box-shadow: 0 0 20px -10px black;
+      }
+    }
+    #play-timer {
+      background-color: #3F5468;
+      color: #F0F3F5;
+      &:hover {
+        color:#F0F3F5 ;
+      }
+      /* border: 1px solid #3F5468; */
+    }
+    #reset-timer {
+      background-color: #E9FADD;
+      &:hover {
+        color: #3F5468;
+      }
     }
   }
 
@@ -384,13 +398,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 250px;
-    height: 250px;
-    font-size: 80px;
+    width: 12rem;
+    height: 12rem;
+    font-size: 60px;
     background-color: #3F5468;
     border-radius: 100%;
     color: #ffff;
     /* border: 4px solid #3F5468 */
+  }
+
+  /* #time-container {
+    flex-direction: column;
+  } */
+
+  #modes-container {
+    align-items: stretch;
   }
 
   #input-container {
@@ -432,8 +454,6 @@
   .active {
     background-color: #3F5468;
     color: #F0F3F5;
-    /* border-bottom: 0px solid #3F5468;
-    box-sizing:border-box; */
   }
 
   .x-icon {
@@ -475,7 +495,7 @@
     background-color: #E9FADD;
     z-index: 999;
     border: none;
-    border-radius: 6px;
+    border-radius: 20px;
     position: fixed;
     align-items: center;
     justify-content: center;
@@ -484,6 +504,7 @@
     padding: 15px;
     width: 25rem;
     height: fit-content;
+    box-shadow: 0 0 20px -10px black;
     /* height: 50%; */
     transform: translate(-50%, -50%);
     .quit-container {
@@ -656,6 +677,8 @@
   let isRunning;
   let checked = []
   let pomodoros = 0
+  let shortBreaks = 0
+  let longBreaks = 0
   let longBreakPomodoros = 4
   let notification = true
 
@@ -734,7 +757,7 @@
   
     settingsModal.close()
   })
-  longBreak_pomodoros.addEventListener('click', (e) => {
+  longBreak_pomodoros.addEventListener('input', (e) => {
     longBreakPomodoros = e.target.value
   })
   timer_pomodoro.addEventListener('input', (e) => {
@@ -804,7 +827,7 @@
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
         pomodoros ++
-        pomodoros_n.innerText = pomodoros
+        pomodoro_button.innerText = 'Pomodoro ' + pomodoros
         if (pomodoros % longBreakPomodoros !== 0) {
           selectMode(MODES.shortBreak)
         } else {
@@ -816,12 +839,16 @@
         // alert("You're done, it's time for a break")
       }
       else if (timeMode === MODES.shortBreak) {
+        shortBreaks ++
+        shortBreak_button.innerText = 'Short Break ' + shortBreaks 
         selectMode(MODES.pomodoro)
         if (autoStart) {
           startTimer()
         }
       }
       else if (timeMode === MODES.longBreak ) {
+        longBreaks ++
+        longBreak_button.innerText = 'Long Break ' + longBreaks
         selectMode(MODES.pomodoro)
         if (autoStart) {
           startTimer()
