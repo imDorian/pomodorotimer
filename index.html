@@ -943,7 +943,7 @@
   function resetTimer() {
     clearInterval(timer)
     isRunning = false
-    min = 25
+    min = data.times.pomodoro
     sec = 0
     timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
     play_timer.innerText = 'Play'
