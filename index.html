@@ -657,30 +657,75 @@
   const timer_pomodoro = document.querySelector('#timer-pomodoro')
   const timer_shortBreak = document.querySelector('#timer-shortBreak')
   const timer_longBreak = document.querySelector('#timer-longBreak')
-
+  const notifications = document.querySelector('#notifications')
 
   const MODES = {
     pomodoro: 'POMODORO',
     shortBreak: 'SHORT_BREAK',
     longBreak: 'LONG_BREAK'
   }
-  let times = {
+  
+  function updateLocalStorage() {
+    window.localStorage.setItem('pomoData', JSON.stringify(data))
+    console.log(data)
+  }
+
+  const miStorage = JSON.parse(window.localStorage.getItem('pomoData'))
+
+  const data = {
+  times: {
     pomodoro: 25,
     shortBreak: 5,
     longBreak: 20
+  },
+  autoStart: true,
+  checked: [],
+  pomodoros: 0,
+  shortBreaks: 0,
+  longBreaks: 0,
+  longBreakInterval: 4,
+  notification: true,
+  theme: false
   }
+
   let timer;
   let timeMode = MODES.pomodoro
-  let min = times.pomodoro;
+  let min = data.times.pomodoro;
   let sec = 0;
-  let autoStart = true
   let isRunning;
-  let checked = []
-  let pomodoros = 0
-  let shortBreaks = 0
-  let longBreaks = 0
-  let longBreakPomodoros = 4
-  let notification = true
+
+  if (window.localStorage.getItem('pomoData')) {
+    console.log(miStorage)
+    data.times = miStorage.times
+    data.autoStart = miStorage.autoStart
+    data.checked = miStorage.checked
+    data.pomodoros = miStorage.pomodoros
+    data.shortBreaks = miStorage.shortBreaks
+    data.longBreaks = miStorage.longBreaks
+    data.longBreakInterval = miStorage.longBreakInterval
+    data.notification = miStorage.notification
+    data.theme = miStorage.theme
+
+    selectMode(MODES.pomodoro)
+
+    autoStart_btn.checked = miStorage.autoStart
+    timer_pomodoro.value = miStorage.times.pomodoro
+    timer_shortBreak.value = miStorage.times.shortBreak
+    timer_longBreak.value = miStorage.times.longBreak
+    longBreak_pomodoros.value = miStorage.longBreakInterval
+    theme_btn.checked = miStorage.theme
+    notifications.checked = miStorage.notification
+
+  } else {
+    console.log('crear data')
+    try {
+      window.localStorage.setItem('pomoData', JSON.stringify(data))
+      console.log('LocalStorageCreated')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  
 
 
   add_task.addEventListener('click', (e) => {
@@ -748,38 +793,57 @@
   })
   autoStart_btn.addEventListener('click', (e) => {
     if (e.target.checked) {
-      autoStart = true
+      data.autoStart = true
     } else {
-      autoStart = false
+      data.autoStart = false
     }
+    updateLocalStorage()
   })
   quitModal_btn.addEventListener('click', (e) => {
   
     settingsModal.close()
   })
   longBreak_pomodoros.addEventListener('input', (e) => {
-    longBreakPomodoros = e.target.value
+    data.longBreakInterval = e.target.value
+    updateLocalStorage()
   })
   timer_pomodoro.addEventListener('input', (e) => {
-    times.pomodoro = e.target.value
+    data.times.pomodoro = e.target.value
+    updateLocalStorage()
     if (timeMode === MODES.pomodoro) {
       selectMode(MODES.pomodoro)
     }
   })
   timer_shortBreak.addEventListener('input', (e) => {
-    times.shortBreak = e.target.value
+    data.times.shortBreak = e.target.value
+    updateLocalStorage()
     if (timeMode === MODES.shortBreak) {
       selectMode(MODES.shortBreak)
     }
   })
   timer_longBreak.addEventListener('input', (e) => {
-    times.longBreak = e.target.value
+    data.times.longBreak = e.target.value
+    updateLocalStorage()
     if (timeMode === MODES.longBreak) {
       selectMode(MODES.longBreak)
     }
   })
-
-
+  theme_btn.addEventListener('click', (e) => {
+    if (e.target.checked) {
+      data.theme = true
+    } else {
+      data.theme = false
+    }
+    updateLocalStorage()
+  })
+  notifications.addEventListener('click', (e) => {
+    if (e.target.checked) {
+      data.notification = true
+    } else {
+      data.notification = false
+    }
+    updateLocalStorage()
+  })
 
   function startTimer() {
     if (!isRunning) {
@@ -801,20 +865,20 @@
     longBreak_button.classList.remove('active');
 
     if (mode === MODES.pomodoro) {
-      min = times.pomodoro
+      min = data.times.pomodoro
       timeMode = MODES.pomodoro
       pomodoro_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
     }
     
     if (mode === MODES.shortBreak) {    
-      min = times.shortBreak
+      min = data.times.shortBreak
       timeMode = MODES.shortBreak
       shortBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
     }
     if (mode === MODES.longBreak) {
-      min = times.longBreak
+      min = data.times.longBreak
       timeMode = MODES.longBreak
       longBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
@@ -826,9 +890,10 @@
       
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
-        pomodoros ++
+        data.pomodoros ++
+        updateLocalStorage()
         pomodoro_button.innerText = 'Pomodoro ' + pomodoros
-        if (pomodoros % longBreakPomodoros !== 0) {
+        if (pomodoros % longBreakInterval !== 0) {
           selectMode(MODES.shortBreak)
         } else {
           selectMode(MODES.longBreak)
@@ -839,7 +904,8 @@
         // alert("You're done, it's time for a break")
       }
       else if (timeMode === MODES.shortBreak) {
-        shortBreaks ++
+        data.shortBreaks ++
+        updateLocalStorage()
         shortBreak_button.innerText = 'Short Break ' + shortBreaks 
         selectMode(MODES.pomodoro)
         if (autoStart) {
@@ -847,7 +913,8 @@
         }
       }
       else if (timeMode === MODES.longBreak ) {
-        longBreaks ++
+        data.longBreaks ++
+        updateLocalStorage()
         longBreak_button.innerText = 'Long Break ' + longBreaks
         selectMode(MODES.pomodoro)
         if (autoStart) {
