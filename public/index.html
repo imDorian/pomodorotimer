@@ -1262,7 +1262,7 @@
   //   updateLocalStorage()
   // })
   notifications.addEventListener('click', (e) => {
-    if (!e.target.checked) {
+    if (e.target.checked) {
       solicitarPermisoNotificaciones()
       data.notification = true
     } else {
