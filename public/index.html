@@ -9,7 +9,8 @@
   <body>
     <header>
       <nav>
-        <h1><img src='img/logo.png' alt="">Pomodoro Timer</h1> <button onclick="notificarUsuario()">Notification</button>
+        <h1><img src='img/logo.png' alt="">Pomodoro Timer</h1>
+        <!-- <button onclick="notificarUsuario()">Notification</button> -->
         <div id="nav-btns--container">
           <button id="settings-btn"><span>Settings</span><img src='img/settings.svg' alt="settings"></button>
           <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
@@ -1353,7 +1354,7 @@
         if (data.autoStart && data.tasks.length !== 0 ) {
           startTimer()
         }
-        // notificarUsuario()
+        notificarUsuario()
         // alert("You're done, it's time for a break")
       }
       else if (timeMode === MODES.shortBreak) {
