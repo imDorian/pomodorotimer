@@ -1309,14 +1309,13 @@
       longBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
     }
+    document.title = `Pomodoro Timer`;
+
   }
 
   function updateTimer() {
     console.log(min, sec)
     if (min === 0 && sec === 0) {
-      if (data.tasks.length === 0) {
-
-      }
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
         data.pomodoros ++
@@ -1385,7 +1384,7 @@
       }
 
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`;
-      document.title = `${formatTime(min)}:${formatTime(sec)} de Concentración`;
+      document.title = `${formatTime(min)}:${formatTime(sec)} Pomodoro`;
       
     }
   }
@@ -1406,15 +1405,13 @@
     shortBreak_button.classList.remove('active');
     longBreak_button.classList.remove('active');
     pomodoro_button.classList.add('active')
+    document.title = 'Pomodoro Timer';
+
   }
 
   function formatTime(time) {
     return time < 10 ? `0${time}` : time
   }
-
-  function actualizarTitulo(time) {
-}
-
 
   function openTaskOptions() {
     if (trash_btn.style.display === 'none') {
