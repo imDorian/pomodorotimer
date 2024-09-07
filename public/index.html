@@ -1284,7 +1284,7 @@
   function selectMode(mode) {
     clearInterval(timer)
     isRunning = false
-    sec = 3
+    sec = 0
     play_timer.innerText = 'Start'
     pomodoro_button.classList.remove('active');
     shortBreak_button.classList.remove('active');
@@ -1385,6 +1385,8 @@
       }
 
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`;
+      document.title = `${formatTime(min)}:${formatTime(sec)} de Concentración`;
+      
     }
   }
 
@@ -1410,9 +1412,9 @@
     return time < 10 ? `0${time}` : time
   }
 
-  function addToChecked() {
-    
-  }
+  function actualizarTitulo(time) {
+}
+
 
   function openTaskOptions() {
     if (trash_btn.style.display === 'none') {
