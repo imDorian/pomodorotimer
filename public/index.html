@@ -1163,14 +1163,14 @@
     timer_longBreak.value = miStorage.times.longBreak
     longBreak_pomodoros.value = miStorage.longBreakInterval
     // theme_btn.checked = miStorage.theme
-    const isNotifications = () => {
-      if (Notification.permission === 'granted') {
-        return true
-      } else {
-        false
-      }
-    }
-    notifications.checked = isNotifications()
+    // const isNotifications = () => {
+    //   if (Notification.permission === 'granted') {
+    //     return true
+    //   } else {
+    //     false
+    //   }
+    // }
+    notifications.checked = miStorage.notifications
     mapTasks(data.tasks)
     mapTasks(data.checked)
   } else {
@@ -1263,7 +1263,7 @@
   // })
   notifications.addEventListener('click', (e) => {
     if (e.target.checked) {
-      solicitarPermisoNotificaciones()
+      // solicitarPermisoNotificaciones()
       data.notification = true
     } else {
       data.notification = false
@@ -1421,25 +1421,25 @@
     } 
   }
 
-  function solicitarPermisoNotificaciones() {
-    if (Notification.permission !== 'granted') {
-        Notification.requestPermission().then((permiso) => {
-            if (permiso === 'granted') {
-                console.log('Permiso concedido');
-            }
-        });
-    }
-}
+//   function solicitarPermisoNotificaciones() {
+//     if (Notification.permission !== 'granted') {
+//         Notification.requestPermission().then((permiso) => {
+//             if (permiso === 'granted') {
+//                 console.log('Permiso concedido');
+//             }
+//         });
+//     }
+// }
 
 // Llamar a la función cuando se cargue la página
 // solicitarPermisoNotificaciones();
 
-function notificarUsuario() {
-    if (Notification.permission === 'granted') {
-        new Notification('¡Tiempo terminado!', {
-            body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
-        });
-    }
-}
+// function notificarUsuario() {
+//     if (Notification.permission === 'granted') {
+//         new Notification('¡Tiempo terminado!', {
+//             body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
+//         });
+//     }
+// }
 
 </script>
