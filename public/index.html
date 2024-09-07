@@ -1164,10 +1164,10 @@
     longBreak_pomodoros.value = miStorage.longBreakInterval
     // theme_btn.checked = miStorage.theme
     const isNotifications = () => {
-      if (Notification.permission !== 'granted') {
-        return false
+      if (Notification.permission === 'granted') {
+        return true
       } else {
-        true
+        false
       }
     }
     notifications.checked = isNotifications()
