@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/Public/logo.png" />
+    <link rel="icon" type="image/png" href='./public/img/logo.png' />
     <title>Pomodoro Timer</title>
   </head>
   <body>
     <header>
       <nav>
-        <h1><img src="/Public/logo.png" alt="">Pomodoro Timer</h1>
+        <h1><img src='./public/img/logo.png' alt="">Pomodoro Timer</h1>
         <div id="nav-btns--container">
-          <button id="settings-btn"><span>Settings</span><img src="/Public/settings.svg" alt="settings"></button>
+          <button id="settings-btn"><span>Settings</span><img src='./public/img/settings.svg' alt="settings"></button>
           <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
           <dialog id="settings-modal">
             <div class="quit-container">
-              <button id="quit-modal--btn"><img src="/Public/x.svg" alt=""></button>
+              <button id="quit-modal--btn"><img src="./public/img/x.svg" alt=""></button>
             </div>
             <form>
               <h5>Timer</h5>
@@ -41,13 +41,13 @@
                 <input class="number-input" value="4" type="number" id="long-break--pomodoros">
               </label>
             </div>
-            <h5>Appearance</h5>
+            <!-- <h5>Appearance</h5>
             <div class="theme-settings">
               <label for="theme">
                 <span>Theme</span>
                 <input class="checkbox-input" value="theme" type="checkbox" id="theme">
               </label>
-            </div>
+            </div> -->
             <h5>Notifications</h5>
             <div class="notifications-settings">
               <label for="notifications">
@@ -83,11 +83,18 @@
               <label for="check-button">
                 <input type="checkbox" class="check-button">
               </label>
-              <input disabled class="task" value="New task"></input>
+              <textarea class="task">newList</textarea>
               <div class="options-container">
-                <span class="pomodoros-completed">1/2</span>
+                <span class="pomodoros-completed">
+                  1/1
+                </span>
+                  <div class="pomodoros-completed inputs-pomodoros-completed">
+                    <input type="number" value="1">
+                    /
+                    <input type="number" value="1">
+                  </div> 
                 <button class="task-options--btn" onclick="openTaskOptions(event)">...</button>
-                <button onclick="" style="display: none" class="trash-btn"><img src="/Public/trash.svg" alt=""></button>
+                <button style="display: none" class="trash-btn"><img src="./public/img/trash" alt="trash"></button>
               </div>
             </li> -->
           </div>
@@ -103,7 +110,7 @@
         </form>
       </article>
       <footer>
-        <span>Developed by Dorian (icons github && linkdin)</span>
+        <span>Developed by Dorian (icons  <a href="https://github.com/imDorian/pomodorotimer" target="_blank" rel="noopener noreferrer">github</a> && linkdin)</span>
       </footer>
     </main>
   </body>
@@ -119,7 +126,7 @@
     --red-color: rgb(223, 66, 66);
     --blue--color:#3F5468;
     --checked-task-color: #80808038;
-    --article-color: #ececec;
+    --article-color: #f5f5f5;
   }
 
   *,
@@ -257,13 +264,13 @@
     display: flex;
     align-items: center;
     justify-content: center ;
-    border: 1px solid var(--checked-task-color);
+    border: 1px solid var(--article-color);
     width: 95%;
     max-width: 600px;
     border-radius: 20px;
     padding: 15px;
-    background: linear-gradient(370deg, var(--article-color), var(--white-color));
-    box-shadow: 0 0 20px -10px var(--primary-color) ;
+    background: var(--article-color);
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
   }
 
   footer {
@@ -337,6 +344,11 @@
         position: relative;
         transition: all 300ms;
         box-shadow: 0 0 10px -10px var(--primary-color);
+        &:hover {
+          .trash-btn, .edit-btn {
+            display: flex;
+          }
+        }
         button {
           border: none;
         }
@@ -347,11 +359,11 @@
           cursor: pointer;
           background-color:var(--white-color);
           color: var(--white-color);
-          background-image: url("Public/x.svg");
+          background-image: url("./public/img/x.svg");
           width: 24px;
           height: 24px;
           appearance: none;
-          border: 1px solid var(--article-color);
+          border: 1px solid var(--checked-task-color);
           background-position: -2rem ;
           background-size: 100%;
           background-repeat: no-repeat;
@@ -363,18 +375,25 @@
           background-position: 0 0;
         }
         .task {
+          resize: none;
+          field-sizing: content;
           font-size: 18px;
           text-align: start;
           width: 100%;
           min-height: 50px;
+          max-height: 100px;
           border-radius: 6px;
           border: none;
           background-color: transparent;
           cursor: pointer;
           color: var(--blue--color);
+          scrollbar-color: var(--primary-color) transparent;
+          scrollbar-width: none;
           &:enabled {
             background-color: var(--white-color);
             color: var(--primary-color);
+            padding-inline: 5px;
+            padding-right: 80px;
           }
         }
     
@@ -390,10 +409,15 @@
   }
   
 
+  .isEditTask {
+    background-color: var(--checked-task-color) !important;
+  }
+
   .task-options--btn {
     border: none;
     font-size: 24px;
     text-align: start;
+    display: none;
     color: var(--checked-task-color);
     &:hover {
       background-color: transparent;
@@ -401,15 +425,21 @@
     }
   }
 
-  .trash-btn {
-      background-color: var(--white-color);
-      /* display: none; */
-      border-radius: 8px;
-      height: auto;
-      width: auto;
-      border: none;
+  .trash-btn, .edit-btn {
+    z-index: 99;
+      background-color: var(--white-color) !important;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      height: 30px;
+      padding: 15px;
+      width: 30px;
+      box-shadow: 0 0 15px -10px black;
+      border: 1px solid var(--checked-task-color) !important;
       &:hover {
-        background-color: var(--red-color);
+        background-color: #e4e4e4 !important;
+        border: 1px solid var(--checked-task-color) !important;
       }
   }
 
@@ -419,16 +449,45 @@
   
   .options-container {
     display: flex;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    height: 100%;
+    transform: translate(0%, -50%);
     flex-direction: row;
     align-items: center;
+    gap: 10px;
     .pomodoros-completed {
+      position: absolute;
+      top: 0;
+      right: -13px;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 14px;
       margin-inline: 10px;
       font-stretch: expanded;
       color: var(--checked-task-color);
       letter-spacing: 2px;
-  }
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+      gap: 10px;
+      /* width: auto; */
+    }
+    .inputs-pomodoros-completed {
+      display: none;
+      input {
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        background: var(--checked-task-color);
+        color: var(--blue--color);
+        border: none;
+        border-radius: 6px;
+        margin-inline: 2px;
+        font-weight: 600;
+        outline: none;
+      }
+    }
   }
 
   .is-dragging {
@@ -717,7 +776,7 @@
           background-color: var(--white-color);
           border-radius: 24px;
           border: 0;
-          background-image: url('/Public/buttonOptions.svg');
+          background-image: url('./public/img/buttonOptions.svg');
           background-repeat: no-repeat;
           background-size: 50%;
           background-position: 0px ;
@@ -726,7 +785,7 @@
           &:checked {
             background-color: #7ec499;
             background-position: 24px;
-            background-image: url('/Public/buttonOptions-white.svg');
+            background-image: url('./public/img/buttonOptions-white.svg');
           }
         }
       }
@@ -799,6 +858,7 @@
   const clear = document.querySelector('#clear')
   const li1 = document.querySelector('#li1')
 
+
   const MODES = {
     pomodoro: 'POMODORO',
     shortBreak: 'SHORT_BREAK',
@@ -826,29 +886,33 @@
   })
 
 
+  let botTask
   tasks.addEventListener('dragover', (e) => {
-        e.preventDefault()
-        const bottomTask = insertAboveTask(e.clientY);
-        const curTask = document.querySelector(".is-dragging");
+    e.preventDefault();
+    const bottomTask = insertAboveTask(e.clientY);
+    const curTask = document.querySelector(".is-dragging");
+    const taskID = data.tasks.find(t => t.id === curTask.id);
+    const newTasksList = data.tasks.filter(f => f.id !== curTask.id);
+    if (!bottomTask) {
+      tasks.appendChild(curTask);
+      if (botTask !== bottomTask) {
+        newTasksList.push(taskID);
+        botTask = bottomTask
+        data.tasks = newTasksList;
+        updateLocalStorage();
+      }
+    } else {
+      tasks.insertBefore(curTask, bottomTask);
+      if (botTask !== bottomTask) {
+        botTask = bottomTask
+        const index = newTasksList.findIndex(t => t.id === bottomTask.id);
+        newTasksList.splice(index, 0, taskID);
+        data.tasks = newTasksList;
+        updateLocalStorage();
+      }
+    }
+  })
 
-        if (!bottomTask) {
-          tasks.appendChild(curTask);
-          const taskID = data.tasks.find(t => t.id === curTask.id)
-          const newTasksList = data.tasks.filter(f => f.id !== curTask.id)
-          data.tasks = newTasksList
-          data.tasks.push(taskID)
-          updateLocalStorage()
-        } else {
-          tasks.insertBefore(curTask, bottomTask);
-          const taskID = data.tasks.find(t => t.id === curTask.id)
-          const index = data.tasks.findIndex(t => t.id === bottomTask.id)
-          console.log(index,'index del de abajo', bottomTask)
-          data.tasks = data.tasks.filter(t => t.id !== curTask.id)
-          data.tasks.splice(index, 0, taskID)
-          console.log(data.tasks)
-          updateLocalStorage()
-        }
-      })
 
   const insertAboveTask = (mouseY) => {
     const els = tasks.querySelectorAll(".task-container:not(.is-dragging)");
@@ -859,27 +923,32 @@
     els.forEach((task) => {
       const { top } = task.getBoundingClientRect()
       const offset = mouseY - top
+      // console.log(top, offset)
       if (offset < 0 && offset > closestOffset) {
         closestOffset = offset;
         closestTask = task;
       }
     });
 
+    // console.log(closestTask)
     return closestTask;
   }
 
-  function mapTasks (tasksArray) {
-    for (const task of tasksArray) {
-      console.log(task)
-      const li = document.createElement('li')
+  const createTask = (task) => {
+    const li = document.createElement('li')
       const label = document.createElement('label')
       const inputLabel = document.createElement('input')
-      const taskInput = document.createElement('input')
+      const taskInput = document.createElement('textarea')
       const optionsButton = document.createElement('button')
       const deleteButton = document.createElement('button')
       const trashImg = document.createElement('img')
       const pomodorosSpan = document.createElement('span')
       const optionsContainer = document.createElement('div')
+      const editBtn = document.createElement('button')
+      const editPen = document.createElement('img')
+      const pomodorosCompletedInput = document.createElement('input')
+      const pomodorosEstimatedInput = document.createElement('input')
+      const pomodorosContainer = document.createElement('div')
 
       li.draggable = true
 
@@ -890,8 +959,35 @@
         li.classList.remove('is-dragging')
       })
 
-      taskInput.addEventListener('dblclick', (e) => {
-        taskInput.disabled = false
+      document.addEventListener('click', (e) => {
+        if (!li.contains(e.target)) {
+          editBtn.style = 'display: true'
+          deleteButton.style = 'display: true'
+          optionsButton.style = 'display: true'
+          label.style = 'display: true'
+          // taskInput.autofocus = true
+          taskInput.disabled = true
+          pomodorosContainer.style = 'display: none'
+          pomodorosSpan.style = 'display: flex'
+          li.classList.remove('isEditTask')
+          const oldTask = data.tasks.find(t => t.id === li.id) ?? false
+          // console.log(li.id, oldTask.id, taskInput.value)
+          if (oldTask !== false && oldTask.task !== taskInput.value) {
+            // console.log(oldTask.task)
+            oldTask.task = taskInput.value
+            console.log(oldTask.task)
+            console.log(data)
+            updateLocalStorage()
+          }
+          if (oldTask !== false && parseInt(oldTask.pomodoros_completed) !== parseInt(pomodorosCompletedInput.value) || oldTask !== false &&  parseInt(oldTask.pomodoros_estimated) !== parseInt(pomodorosEstimatedInput.value)) {
+            console.log(oldTask.pomodoros_completed, parseInt(pomodorosCompletedInput.value), 'pomodoros completed')
+            console.log(oldTask.pomodoros_estimated, parseInt(pomodorosEstimatedInput.value), 'pomodoros estimated')
+            oldTask.pomodoros_completed = parseInt(pomodorosCompletedInput.value)
+            oldTask.pomodoros_estimated = parseInt(pomodorosEstimatedInput.value)
+            pomodorosSpan.textContent = `${pomodorosCompletedInput.value}/${pomodorosEstimatedInput.value}`
+            updateLocalStorage()
+          }
+        }
       })
 
       deleteButton.addEventListener('click', (e) => {
@@ -911,11 +1007,24 @@
 
       optionsButton.addEventListener('click', (e) => {
         console.log(deleteButton.style.display)
-        if (deleteButton.style.display === "none") {
+        if (deleteButton.style.display === "none" && editBtn.style.display === 'none') {
           deleteButton.style.display = 'inline'
+          editBtn.style.display = 'inline'
         } else {
           deleteButton.style.display = 'none'
+          editBtn.style.display = 'none'
         }
+      })
+
+      editBtn.addEventListener('click', (e) => {
+        editBtn.style = 'display: none'
+        deleteButton.style = 'display: none'
+        optionsButton.style = 'display: none'
+        label.style = 'display: none'
+        pomodorosSpan.style = 'display: none'
+        pomodorosContainer.style = 'display: flex'
+        taskInput.disabled = false
+        li.classList.toggle('isEditTask')
       })
 
       inputLabel.addEventListener('click', (e) => {
@@ -940,16 +1049,31 @@
         }
       })
       
+
+      pomodorosCompletedInput.type = 'number'
+      pomodorosEstimatedInput.type = 'number'
+      pomodorosCompletedInput.value = task.pomodoros_completed
+      pomodorosEstimatedInput.value = task.pomodoros_estimated
+
+      pomodorosContainer.appendChild(pomodorosCompletedInput)
+      // pomodorosContainer.innerText = '/'
+      pomodorosContainer.appendChild(pomodorosEstimatedInput)
+      pomodorosContainer.classList.add('inputs-pomodoros-completed')
+      pomodorosContainer.style = 'display: none'
+      editBtn.classList.add('edit-btn')
+      editPen.src = './public/img/editPencil.svg'
+      editBtn.appendChild(editPen)
       optionsContainer.classList.add('options-container')
       pomodorosSpan.classList.add('pomodoros-completed')
       pomodorosSpan.innerText = task.pomodoros_completed + '/' + task.pomodoros_estimated
       label.for = 'check-button'
       inputLabel.classList.add('check-button')
       inputLabel.type = 'checkbox'
-      trashImg.src = '/Public/trash.svg'
+      trashImg.src = './public/img/trash.svg'
       deleteButton.appendChild(trashImg)
       optionsButton.textContent = '...'
-      deleteButton.style = 'display: none'
+      // deleteButton.style = 'display: none'
+      // editBtn.style = 'display: none'
       taskInput.value = task.task
       taskInput.classList.add('task')
       taskInput.disabled = true
@@ -963,8 +1087,10 @@
       optionsButton.classList.add('task-options--btn')
       deleteButton.classList.add('trash-btn')
       optionsContainer.appendChild(pomodorosSpan)
+      optionsContainer.appendChild(pomodorosContainer)
       optionsContainer.appendChild(optionsButton)
       optionsContainer.appendChild(deleteButton)
+      optionsContainer.appendChild(editBtn)
       li.appendChild(optionsContainer)
       li.id = task.id
       if (task.checked) {
@@ -973,6 +1099,11 @@
       } else {
         tasks.appendChild(li)
       }
+  }
+
+  function mapTasks (tasksArray) {
+    for (const task of tasksArray) {
+      createTask(task)
     }
   }
   
@@ -1013,15 +1144,17 @@
     data.tasks = miStorage.tasks
 
     selectMode(MODES.pomodoro)
+    pomodoro_button.innerText = 'Pomodoro ' + miStorage.pomodoros
+    shortBreak_button.innerText = 'Short Break ' + miStorage.shortBreaks
+    longBreak_button.innerText = 'Long Break ' + miStorage.longBreaks
 
     autoStart_btn.checked = miStorage.autoStart
     timer_pomodoro.value = miStorage.times.pomodoro
     timer_shortBreak.value = miStorage.times.shortBreak
     timer_longBreak.value = miStorage.times.longBreak
     longBreak_pomodoros.value = miStorage.longBreakInterval
-    theme_btn.checked = miStorage.theme
+    // theme_btn.checked = miStorage.theme
     notifications.checked = miStorage.notification
-
     mapTasks(data.tasks)
     mapTasks(data.checked)
   } else {
@@ -1040,9 +1173,9 @@
     e.preventDefault()
     const text_input = document.getElementById('text-input')
     const newValue = text_input.value
-    const estimatedPomo = pomodoros_estimated.value
+    const estimatedPomo = Number(pomodoros_estimated.value)
     console.log(estimatedPomo)
-    const newTask = {
+    const task = {
         id: generateId(),
         task: newValue,
         pomodoros_completed: 0,
@@ -1051,97 +1184,9 @@
       }
 
     if (newValue.length > 0) {
-      const li = document.createElement('li')
-      const label = document.createElement('label')
-      const inputLabel = document.createElement('input')
-      const taskInput = document.createElement('input')
-      const optionsButton = document.createElement('button')
-      const deleteButton = document.createElement('button')
-      const trashImg = document.createElement('img')
-      const pomodorosSpan = document.createElement('span')
-      const optionsContainer = document.createElement('div')
+      createTask(task)
 
-      deleteButton.addEventListener('click', (e) => {
-        if (newTask.checked) {
-          checked_tasks.removeChild(li)
-          const newList = data.checked.filter(t => t.id !== newTask.id)
-          data.checked = newList
-          updateLocalStorage()
-        } else {
-          tasks.removeChild(li)
-          const newList = data.tasks.filter(t => t.id !== newTask.id)
-          data.tasks = newList
-          updateLocalStorage()
-        }
-      })
-
-      optionsButton.addEventListener('click', (e) => {
-        console.log(deleteButton.style.display)
-        if (deleteButton.style.display === "none") {
-          deleteButton.style.display = 'inline'
-        } else {
-          deleteButton.style.display = 'none'
-        }
-      })
-
-      inputLabel.addEventListener('click', (e) => {
-        if (newTask.checked === false) {
-          tasks.removeChild(li)
-          newTask.checked = true
-          li.classList.add('checked-task')
-          const newList = data.tasks.filter(t => t.id !== newTask.id)
-          data.tasks = newList
-          data.checked.unshift(newTask)
-          checked_tasks.insertBefore(li, checked_tasks.firstChild)
-          updateLocalStorage()
-        } else {
-          checked_tasks.removeChild(li)
-          newTask.checked = false
-          li.classList.remove('checked-task')
-          const newList = data.checked.filter(t => t.id !== newTask.id)
-          data.checked = newList
-          data.tasks.push(newTask)
-          tasks.appendChild(li)
-          updateLocalStorage()
-        }
-      })
-      
-      li.draggable = true
-
-      li.addEventListener('dragstart', (e) => {
-        li.classList.add('is-dragging')
-      })
-      li.addEventListener('dragend', (e) => {
-        li.classList.remove('is-dragging')
-      })
-      optionsContainer.classList.add('options-container')
-      pomodorosSpan.classList.add('pomodoros-completed')
-      pomodorosSpan.innerText = newTask.pomodoros_completed + '/' + estimatedPomo
-      label.for = 'check-button'
-      inputLabel.classList.add('check-button')
-      inputLabel.type = 'checkbox'
-      trashImg.src = '/Public/trash.svg'
-      deleteButton.appendChild(trashImg)
-      optionsButton.textContent = '...'
-      deleteButton.style = 'display: none'
-      taskInput.value = newValue
-      taskInput.disabled = true
-      taskInput.classList.add('task')
-      label.appendChild(inputLabel)
-      li.classList.add('task-container')
-      li.appendChild(label)
-      li.appendChild(taskInput)
-      optionsButton.classList.add('task-options--btn')
-      deleteButton.classList.add('trash-btn')
-      optionsContainer.appendChild(pomodorosSpan)
-      optionsContainer.appendChild(optionsButton)
-      optionsContainer.appendChild(deleteButton)
-      li.id = newTask.id
-      li.appendChild(optionsContainer)
-
-      tasks.appendChild(li)
-
-      data.tasks.push(newTask)
+      data.tasks.push(task)
       console.log(data.tasks)
       updateLocalStorage()
 
@@ -1153,8 +1198,8 @@
   settings_btn.addEventListener('click', (e) => {
     settingsModal.showModal()
   })
-  theme_btn.addEventListener('click', (e) => {
-  })
+  // theme_btn.addEventListener('click', (e) => {
+  // })
   autoStart_btn.addEventListener('click', (e) => {
     if (e.target.checked) {
       data.autoStart = true
@@ -1172,34 +1217,34 @@
     updateLocalStorage()
   })
   timer_pomodoro.addEventListener('input', (e) => {
-    data.times.pomodoro = e.target.value
+    data.times.pomodoro = Number(e.target.value)
     updateLocalStorage()
     if (timeMode === MODES.pomodoro) {
       selectMode(MODES.pomodoro)
     }
   })
   timer_shortBreak.addEventListener('input', (e) => {
-    data.times.shortBreak = e.target.value
+    data.times.shortBreak = Number(e.target.value)
     updateLocalStorage()
     if (timeMode === MODES.shortBreak) {
       selectMode(MODES.shortBreak)
     }
   })
   timer_longBreak.addEventListener('input', (e) => {
-    data.times.longBreak = e.target.value
+    data.times.longBreak = Number(e.target.value)
     updateLocalStorage()
     if (timeMode === MODES.longBreak) {
       selectMode(MODES.longBreak)
     }
   })
-  theme_btn.addEventListener('click', (e) => {
-    if (e.target.checked) {
-      data.theme = true
-    } else {
-      data.theme = false
-    }
-    updateLocalStorage()
-  })
+  // theme_btn.addEventListener('click', (e) => {
+  //   if (e.target.checked) {
+  //     data.theme = true
+  //   } else {
+  //     data.theme = false
+  //   }
+  //   updateLocalStorage()
+  // })
   notifications.addEventListener('click', (e) => {
     if (e.target.checked) {
       data.notification = true
@@ -1223,26 +1268,26 @@
     clearInterval(timer)
     isRunning = false
     sec = 0
-    play_timer.innerText = 'Play'
+    play_timer.innerText = 'Start'
     pomodoro_button.classList.remove('active');
     shortBreak_button.classList.remove('active');
     longBreak_button.classList.remove('active');
 
     if (mode === MODES.pomodoro) {
-      min = data.times.pomodoro
+      min = Number(data.times.pomodoro)
       timeMode = MODES.pomodoro
       pomodoro_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
     }
     
     if (mode === MODES.shortBreak) {    
-      min = data.times.shortBreak
+      min = Number(data.times.shortBreak)
       timeMode = MODES.shortBreak
       shortBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
     }
     if (mode === MODES.longBreak) {
-      min = data.times.longBreak
+      min = Number(data.times.longBreak)
       timeMode = MODES.longBreak
       longBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
@@ -1250,19 +1295,44 @@
   }
 
   function updateTimer() {
+    console.log(min, sec)
     if (min === 0 && sec === 0) {
-      
+      if (data.tasks.length === 0) {
+
+      }
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
         data.pomodoros ++
+        const firstChildTasks = tasks.firstElementChild
+        const taskObj = data.tasks.find(t => t.id === firstChildTasks.id) 
+        taskObj.pomodoros_completed ++
+        const pomodorosCompletedTask = document.querySelector(`#${firstChildTasks.id}`).querySelector('.pomodoros-completed')
+        pomodorosCompletedTask.innerText = taskObj.pomodoros_completed + '/' + taskObj.pomodoros_estimated
         updateLocalStorage()
-        pomodoro_button.innerText = 'Pomodoro ' + pomodoros
-        if (pomodoros % longBreakInterval !== 0) {
+        pomodoro_button.innerText = 'Pomodoro ' + data.pomodoros
+
+        console.log(taskObj.pomodoros_completed, taskObj.pomodoros_estimated)
+        if (taskObj.pomodoros_completed === taskObj.pomodoros_estimated) {
+          taskObj.checked = true
+          tasks.removeChild(firstChildTasks)
+          firstChildTasks.querySelector('.check-button').checked = true
+          firstChildTasks.classList.add('checked-task')
+          const newList = data.tasks.filter(t => t.id !== taskObj.id)
+          data.tasks = newList
+          data.checked.unshift(taskObj)
+          checked_tasks.insertBefore(firstChildTasks, checked_tasks.firstChild)
+          updateLocalStorage()
+          if (data.tasks.length === 0) {
+            console.log("Congratulations, you've completed the tasks")
+          }
+        }
+
+        if (data.pomodoros % data.longBreakInterval !== 0) {
           selectMode(MODES.shortBreak)
         } else {
           selectMode(MODES.longBreak)
         }
-        if (autoStart) {
+        if (data.autoStart && data.tasks.length !== 0 ) {
           startTimer()
         }
         // alert("You're done, it's time for a break")
@@ -1270,18 +1340,18 @@
       else if (timeMode === MODES.shortBreak) {
         data.shortBreaks ++
         updateLocalStorage()
-        shortBreak_button.innerText = 'Short Break ' + shortBreaks 
+        shortBreak_button.innerText = 'Short Break ' + data.shortBreaks 
         selectMode(MODES.pomodoro)
-        if (autoStart) {
+        if (data.autoStart) {
           startTimer()
         }
       }
       else if (timeMode === MODES.longBreak ) {
         data.longBreaks ++
         updateLocalStorage()
-        longBreak_button.innerText = 'Long Break ' + longBreaks
+        longBreak_button.innerText = 'Long Break ' + data.longBreaks
         selectMode(MODES.pomodoro)
-        if (autoStart) {
+        if (data.autoStart) {
           startTimer()
         }
       }
@@ -1310,7 +1380,7 @@
     min = data.times.pomodoro
     sec = 0
     timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
-    play_timer.innerText = 'Play'
+    play_timer.innerText = 'Start'
     shortBreak_button.classList.remove('active');
     longBreak_button.classList.remove('active');
     pomodoro_button.classList.add('active')
