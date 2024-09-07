@@ -9,7 +9,7 @@
   <body>
     <header>
       <nav>
-        <h1><img src='img/logo.png' alt="">Pomodoro Timer</h1>
+        <h1><img src='img/logo.png' alt="">Pomodoro Timer</h1> <button onclick="notificarUsuario()">Notification</button>
         <div id="nav-btns--container">
           <button id="settings-btn"><span>Settings</span><img src='img/settings.svg' alt="settings"></button>
           <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
@@ -1162,7 +1162,14 @@
     timer_longBreak.value = miStorage.times.longBreak
     longBreak_pomodoros.value = miStorage.longBreakInterval
     // theme_btn.checked = miStorage.theme
-    notifications.checked = miStorage.notification
+    const isNotifications = () => {
+      if (Notification.permission !== 'granted') {
+        return false
+      } else {
+        true
+      }
+    }
+    notifications.checked = isNotifications()
     mapTasks(data.tasks)
     mapTasks(data.checked)
   } else {
@@ -1255,6 +1262,7 @@
   // })
   notifications.addEventListener('click', (e) => {
     if (e.target.checked) {
+      solicitarPermisoNotificaciones()
       data.notification = true
     } else {
       data.notification = false
@@ -1275,7 +1283,7 @@
   function selectMode(mode) {
     clearInterval(timer)
     isRunning = false
-    sec = 0
+    sec = 3
     play_timer.innerText = 'Start'
     pomodoro_button.classList.remove('active');
     shortBreak_button.classList.remove('active');
@@ -1313,14 +1321,16 @@
         data.pomodoros ++
         const firstChildTasks = tasks.firstElementChild
         const taskObj = data.tasks.find(t => t.id === firstChildTasks.id) 
-        taskObj.pomodoros_completed ++
-        const pomodorosCompletedTask = document.querySelector(`#${firstChildTasks.id}`).querySelector('.pomodoros-completed')
-        pomodorosCompletedTask.innerText = taskObj.pomodoros_completed + '/' + taskObj.pomodoros_estimated
-        updateLocalStorage()
-        pomodoro_button.innerText = 'Pomodoro ' + data.pomodoros
+        if (taskObj) {taskObj.pomodoros_completed ++}
+        if (firstChildTasks) {
+          const pomodorosCompletedTask = document.querySelector(`#${firstChildTasks.id}`).querySelector('.pomodoros-completed')
+          pomodorosCompletedTask.innerText = taskObj.pomodoros_completed + '/' + taskObj.pomodoros_estimated
+          updateLocalStorage()
+          pomodoro_button.innerText = 'Pomodoro ' + data.pomodoros
+          console.log(taskObj.pomodoros_completed, taskObj.pomodoros_estimated)
+        }
 
-        console.log(taskObj.pomodoros_completed, taskObj.pomodoros_estimated)
-        if (taskObj.pomodoros_completed === taskObj.pomodoros_estimated) {
+        if (taskObj && taskObj.pomodoros_completed === taskObj.pomodoros_estimated) {
           taskObj.checked = true
           tasks.removeChild(firstChildTasks)
           firstChildTasks.querySelector('.check-button').checked = true
@@ -1343,6 +1353,7 @@
         if (data.autoStart && data.tasks.length !== 0 ) {
           startTimer()
         }
+        // notificarUsuario()
         // alert("You're done, it's time for a break")
       }
       else if (timeMode === MODES.shortBreak) {
@@ -1409,4 +1420,26 @@
       trash_btn.style = 'display: none'
     } 
   }
+
+  function solicitarPermisoNotificaciones() {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then((permiso) => {
+            if (permiso === 'granted') {
+                console.log('Permiso concedido');
+            }
+        });
+    }
+}
+
+// Llamar a la función cuando se cargue la página
+// solicitarPermisoNotificaciones();
+
+function notificarUsuario() {
+    if (Notification.permission === 'granted') {
+        new Notification('¡Tiempo terminado!', {
+            body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
+        });
+    }
+}
+
 </script>
