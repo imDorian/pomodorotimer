@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href='./public/img/logo.png' />
+    <link rel="icon" type="image/png" href='img/logo.png' />
     <title>Pomodoro Timer</title>
   </head>
   <body>
     <header>
       <nav>
-        <h1><img src='./public/img/logo.png' alt="">Pomodoro Timer</h1>
+        <h1><img src='img/logo.png' alt="">Pomodoro Timer</h1>
         <div id="nav-btns--container">
-          <button id="settings-btn"><span>Settings</span><img src='./public/img/settings.svg' alt="settings"></button>
+          <button id="settings-btn"><span>Settings</span><img src='img/settings.svg' alt="settings"></button>
           <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
           <dialog id="settings-modal">
             <div class="quit-container">
-              <button id="quit-modal--btn"><img src="./public/img/x.svg" alt=""></button>
+              <button id="quit-modal--btn"><img src="img/x.svg" alt=""></button>
             </div>
             <form>
               <h5>Timer</h5>
@@ -1061,7 +1061,7 @@
       pomodorosContainer.classList.add('inputs-pomodoros-completed')
       pomodorosContainer.style = 'display: none'
       editBtn.classList.add('edit-btn')
-      editPen.src = './public/img/editPencil.svg'
+      editPen.src = 'img/editPencil.svg'
       editBtn.appendChild(editPen)
       optionsContainer.classList.add('options-container')
       pomodorosSpan.classList.add('pomodoros-completed')
@@ -1069,7 +1069,7 @@
       label.for = 'check-button'
       inputLabel.classList.add('check-button')
       inputLabel.type = 'checkbox'
-      trashImg.src = './public/img/trash.svg'
+      trashImg.src = 'img/trash.svg'
       deleteButton.appendChild(trashImg)
       optionsButton.textContent = '...'
       // deleteButton.style = 'display: none'
