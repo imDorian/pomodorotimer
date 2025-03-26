@@ -2,11 +2,13 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="google-site-verification" content="tu_codigo_aqui">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href='img/logo.png' />
     <meta name="Pomodoro Timer - Temporizador Pomodoro" content="Aumenta tu productividad con nuestro Pomodoro Timer Online. Temporizador gratuito con lista de tareas integrada. ¡Empieza ahora!">
     <meta name="keywords" content="pomodoro, temporizador, timer, online, productividad, tareas, lista, app">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Temporizador Pomodoro</title>
   </head>
   <body>
@@ -120,6 +122,7 @@
         </form>
       </article>
     </div>
+
     <div class="second-container">
       <section>
       <h1>⏳Temporizador Pomodoro Online – Mejora tu Productividad con el Mejor Reloj Pomodoro</h1>
@@ -179,6 +182,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Inter", sans-serif;
   }
   button {
     border-radius: 20px;
@@ -285,7 +289,8 @@
   }
 
   body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: "Inter", sans-serif;
       /* font-size: 1px; */
     display: flex;
     flex-direction: column;
@@ -424,7 +429,7 @@
         background-color: var(--white-color);
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
         gap: 10px;
         /* border: none; */
@@ -471,7 +476,7 @@
           field-sizing: content;
           font-size: 18px;
           text-align: start;
-          width: 100%;
+          width: 80%;
           min-height: 50px;
           max-height: 100px;
           border-radius: 6px;
