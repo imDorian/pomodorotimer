@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href='img/logo.png' />
-    <title>Pomodoro Timer</title>
+    <title>Temporizador Pomodoro</title>
   </head>
   <body>
     <header>
       <nav>
-        <h1><img src='img/logo.png' alt="">Pomodoro Timer</h1>
+        <h1><img src='img/logo.png' alt="">Temporizador Pomodoro</h1>
         <!-- <button onclick="notificarUsuario()">Notification</button> -->
         <div id="nav-btns--container">
-          <button id="settings-btn"><span>Settings</span><img src='img/settings.svg' alt="settings"></button>
+          <button id="settings-btn"><span>Configuración</span><img src='img/settings.svg' alt="configuración"></button>
           <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
           <dialog id="settings-modal">
             <div class="quit-container">
               <button id="quit-modal--btn"><img src="img/x.svg" alt=""></button>
             </div>
             <form>
-              <h5>Timer</h5>
+              <h5>Temporizador</h5>
               <div class="timer-settings">
               <label for="autostart">
-                <span>Autostart</span>
+                <span>Inicio automático</span>
                 <input class="checkbox-input" checked value="autostart" type="checkbox" id="autostart">
               </label>
               <label for="timer-pomodoro">
-                <span>Pomodoro minutes</span>
-                <input class="number-input" value="25" type="number" id="timer-pomodoro">
+                <span>Minutos de Pomodoro</span>
+                <input class="number-input" value="25"  type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  id="timer-pomodoro">
               </label>
               <label for="timer-shortBreak">
-                <span>Short break minutes</span>
-                <input class="number-input" value="5" type="number" id="timer-shortBreak">
+                <span>Minutos de descanso corto</span>
+                <input class="number-input" value="5" type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-shortBreak">
               </label>
               <label for="timer-longBreak">
-                <span>Long break minutes</span>
-                <input class="number-input" value="20" type="number" id="timer-longBreak">
+                <span>Minutos de descanso largo</span>
+                <input class="number-input" value="20" type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-longBreak">
               </label>
               <label for="long-break--pomodoros">
-                <span>Long break interval</span>
-                <input class="number-input" value="4" type="number" id="long-break--pomodoros">
+                <span>Intervalo de descansos largos</span>
+                <input class="number-input" value="4" type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="long-break--pomodoros">
               </label>
             </div>
             <!-- <h5>Appearance</h5>
@@ -49,10 +49,10 @@
                 <input class="checkbox-input" value="theme" type="checkbox" id="theme">
               </label>
             </div> -->
-            <h5>Notifications</h5>
+            <h5>Notificaciones</h5>
             <div class="notifications-settings">
               <label for="notifications">
-                <span>Notify when timer completes</span>
+                <span>Notificar cuando el temporizador termine</span>
                 <input class="checkbox-input" value="notifications" type="checkbox" id="notifications">
               </label>
             </div>
@@ -62,11 +62,12 @@
       </nav>
     </header>
     <main>
+      <div class="first-container">
       <article class='timer-container'>
           <div id="modes-container">
             <button id="pomodoro" class="active" onclick="selectMode('POMODORO')">Pomodoros 0</button>
-            <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Short Breaks 0</button>
-            <button id="longBreak" onclick="selectMode('LONG_BREAK')">Long Breaks 0</button>
+            <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Descansos cortos 0</button>
+            <button id="longBreak" onclick="selectMode('LONG_BREAK')">Descansos largos 0</button>
           </div>
           <div id="time-block">
             <div id="time-container">
@@ -77,12 +78,12 @@
 
           </div>
           <div id="play-reset--container">
-            <button id='play-timer' onclick="startTimer()">Start</button>
-            <button id='reset-timer' onclick="resetTimer()">Reset</button>
+            <button id='play-timer' onclick="startTimer()">Iniciar</button>
+            <button id='reset-timer' onclick="resetTimer()">Reiniciar</button>
           </div>
       </article>
       <article class="tasks-container">
-        <h2>Tasks </h2>
+        <h2>Tareas</h2>
         <ul id="task-list">
           <div id="tasks">
             <!-- <li id="li1" draggable="true">
@@ -109,14 +110,48 @@
         </ul>
         <form id="input-container">
           <div id="taskInput-container">
-            <input autocomplete="off" placeholder="Introduce the task..." id="text-input" type="text"></input>
+            <input autocomplete="off" placeholder="Introduce la tarea..." id="text-input" type="text"></input>
             <input type="number" placeholder="1" value="1" min="1" id="pomodoros-estimated">
           </div>
-          <button id="addTask">Add Task</button>
+          <button id="addTask">Agregar Tarea</button>
         </form>
       </article>
+    </div>
+    <div class="second-container">
+      <section>
+      <h1>⏳Temporizador Pomodoro Online – Mejora tu Productividad con el Mejor Reloj Pomodoro</h1>
+      <p>
+        ¿Sientes que el tiempo se te escapa sin lograr terminar tus tareas? Nuestra app de Pomodoro gratuita te ayuda a enfocarte, organizarte y aumentar tu productividad. Con un temporizador Pomodoro online y una lista de tareas editable, podrás gestionar mejor tu tiempo y completar tus proyectos sin distracciones.
+      </p>
+    </section>
+  </div>
+  <div>
+    <section>
+      <h2>🎯 ¿Qué es el Método Pomodoro y por qué es tan efectivo?</h2>
+      <p>El Método Pomodoro divide tu trabajo en sesiones de 25 minutos seguidas de breves descansos, optimizando la concentración y evitando la fatiga mental. Numerosos estudios han demostrado que este sistema reduce la procrastinación y mejora el rendimiento.</p>
+    </section>
+  </div>
+  <div>
+    <section>
+      <h2>🔥 Funciones Clave de Nuestra App Pomodoro:</h2>
+      <ul>
+        <li>✔️ Temporizador Pomodoro gratuito y personalizable</li>
+        <li>✔️ Lista de tareas integrada y editable 📝</li>
+        <li>✔️ Seguimiento de sesiones completadas 📊</li>
+        <li>✔️ Interfaz simple, rápida y sin distracciones 🖥️</li>
+        <li>✔️ Modo oscuro para cuidar tu vista 🌙</li>
+      </ul>
+    </section>
+  </div>
+  <div>
+    <section>
+      <h2>🚀 Aumenta tu Productividad con el Mejor Temporizador Pomodoro Online</h2>
+      <p>Ya seas estudiante, programador, escritor o simplemente quieras gestionar mejor tu tiempo, este Temporizador Pomodoro Online es la herramienta ideal para ti. Empieza a trabajar de manera más inteligente, efectiva y sin estrés.</p>
+      <h3>✨ ¡Pruébalo ahora gratis y revoluciona tu forma de trabajar! ✨</h3>
+    </section>
+  </div>
       <footer>
-        <a href="https://github.com/imDorian/pomodorotimer" target="_blank" rel="noopener noreferrer">Developed by Dorian &nbsp; <img src="img/github.svg" alt=""></a>
+        <a href="https://github.com/imDorian/pomodorotimer" target="_blank" rel="noopener noreferrer">Desarrollado por Dorian &nbsp; <img src="img/github.svg" alt=""></a>
       </footer>
     </main>
   </body>
@@ -169,7 +204,8 @@
     width: 100vw;
     position: fixed;
     top: 0px;
-    background-color: rgb(228, 228, 228);
+    background-color: rgba(228, 228, 228, 0.568);
+    backdrop-filter: blur(5px);
 
     z-index: 99;
     & h1 {
@@ -198,6 +234,8 @@
       width: 100%;
       height: 70px;
       padding: 10px ;
+      /* background-color: rgba(228, 228, 228, 0.8); */
+      /* backdrop-filter: blur(1px); */
 
       /* div {
         display: flex;
@@ -254,17 +292,51 @@
     background-color: rgb(228, 228, 228);
     gap: 20px;
     color: var(--primary-color);
-    padding-top: 100px;
+    /* padding-top: 100px; */
+    /* box-sizing:content-box; */
   }
   main {
     width: 100%;
+    display: grid;
+    justify-items: center;
+    scroll-behavior: smooth; 
+    p {
+      margin: 0;
+      padding: 0;
+    }
+   
+  }
+
+  ::-webkit-scrollbar {
+  display: none;
+}
+
+  .first-container {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 20px;
-    padding-bottom: 100px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  .second-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:30px;
+    /* width: 60%; */
+    max-width: 550px;
+    section {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      ul {
+        padding:none;
+        margin: none;
+        list-style: none;
+      }
+    }
   }
 
   article {
@@ -302,6 +374,7 @@
     flex-direction: column;
     justify-content: space-around;
     gap: 50px;
+    height: 500px;
     & div {
         display: flex;
         flex-direction: row;
@@ -593,7 +666,7 @@
     border-radius: 100%;
     color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
-    z-index: 99;
+    z-index: 2;
   }
 
   #time-block {
@@ -782,7 +855,7 @@
         gap: 10px;
         padding-block: 15px;
         margin-block: 15px;
-        border-bottom: 1px solid var(--blue--color);
+        /* border-bottom: 1px solid var(--blue--color); */
         /* &::after {
           content: '';
           width: 100%;
@@ -846,8 +919,52 @@
 
   @media screen and (min-width: 900px) {
     main {
-      flex-direction: row;
-      align-items: stretch;
+      /* flex-direction: row; */
+      /* align-items: stretch; */
+      height: 100vh; 
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+    }
+
+    main > div {
+      height: 100vh;
+      scroll-snap-align: start;
+      display: grid;
+      place-content: center;
+      max-width: 600px;
+      /* gap: 50px; */
+      font-size: larger;
+      section {
+        h2, h1 {
+          text-align: center;
+        }
+        p {
+          border-radius: 16px;
+          background-color: var(--article-color);
+          padding: 20px;
+        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+        /* width: 60%; */
+        max-width: 550px;
+        ul {
+          padding:none;
+          margin: none;
+          list-style: none;
+          border-radius: 16px;
+          background-color: var(--article-color);
+          padding: 20px;
+        }
+      }
+      h3 {
+        /* margin-top: 80px; */
+        text-align: center;
+        padding: 0;
+        margin: 0;
+      }
     }
     .timer-container {
       width: 50%;
@@ -857,6 +974,21 @@
       width: 40%;
       max-width: 400px;
     }
+    .first-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      height: 70dvh;
+
+      gap: 20px;
+      scroll-snap-align: start;
+      height: 100vh;
+    }
+    /* .second-container {
+      scroll-snap-align: start;
+      height: 100vh;
+    } */
   }
   @media screen and (min-width: 500px) {
     header::after {
@@ -1189,8 +1321,8 @@
 
     selectMode(MODES.pomodoro)
     pomodoro_button.innerText = 'Pomodoro ' + miStorage.pomodoros
-    shortBreak_button.innerText = 'Short Break ' + miStorage.shortBreaks
-    longBreak_button.innerText = 'Long Break ' + miStorage.longBreaks
+    shortBreak_button.innerText = 'Descanso corto ' + miStorage.shortBreaks
+    longBreak_button.innerText = 'Descanso largo ' + miStorage.longBreaks
 
     autoStart_btn.checked = miStorage.autoStart
     timer_pomodoro.value = miStorage.times.pomodoro
@@ -1417,7 +1549,7 @@
       else if (timeMode === MODES.shortBreak) {
         data.shortBreaks ++
         updateLocalStorage()
-        shortBreak_button.innerText = 'Short Break ' + data.shortBreaks 
+        shortBreak_button.innerText = 'Descanso corto ' + data.shortBreaks 
         selectMode(MODES.pomodoro)
         if (data.autoStart) {
           startTimer()
@@ -1426,7 +1558,7 @@
       else if (timeMode === MODES.longBreak ) {
         data.longBreaks ++
         updateLocalStorage()
-        longBreak_button.innerText = 'Long Break ' + data.longBreaks
+        longBreak_button.innerText = 'Descanso largo ' + data.longBreaks
         selectMode(MODES.pomodoro)
         if (data.autoStart) {
           startTimer()
