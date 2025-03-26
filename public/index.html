@@ -68,8 +68,13 @@
             <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Short Breaks 0</button>
             <button id="longBreak" onclick="selectMode('LONG_BREAK')">Long Breaks 0</button>
           </div>
-          <div id="time-container">
-            <span id='timer'>25:00</span>
+          <div id="time-block">
+            <div id="time-container">
+              <span id='timer'>25:00</span>
+            </div>
+            <div id="behind-timer">
+            </div>
+
           </div>
           <div id="play-reset--container">
             <button id='play-timer' onclick="startTimer()">Start</button>
@@ -77,7 +82,7 @@
           </div>
       </article>
       <article class="tasks-container">
-        <h2>Tasks <button id="clear">Clear</button></h2>
+        <h2>Tasks </h2>
         <ul id="task-list">
           <div id="tasks">
             <!-- <li id="li1" draggable="true">
@@ -164,7 +169,8 @@
     width: 100vw;
     position: fixed;
     top: 0px;
-    background-color: var(--white-color);
+    background-color: rgb(228, 228, 228);
+
     z-index: 99;
     & h1 {
         background-color: transparent;
@@ -245,7 +251,7 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    background-color: var(--white-color);
+    background-color: rgb(228, 228, 228);
     gap: 20px;
     color: var(--primary-color);
     padding-top: 100px;
@@ -271,7 +277,7 @@
     border-radius: 20px;
     padding: 15px;
     background: var(--article-color);
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    /* box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; */
   }
 
   footer {
@@ -280,7 +286,8 @@
     width: 100%;
     height: 30px;
     text-align: center;
-    background-color: var(--article-color);
+    background-color: rgb(228, 228, 228);
+
     a {
       display: flex;
       flex-wrap: nowrap;
@@ -300,7 +307,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        /* width: 100%; */
         gap: 20px;
         & button {
             width: 35%;
@@ -329,7 +336,7 @@
       height: inherit;
       overflow-y: auto;
       overflow-x: hidden;
-      border-block: 1px solid var(--primary-color);
+      border-block: 1px solid rgba(0, 0, 0, 0.103);
       padding-block: 15px;
       scrollbar-color: var(--primary-color) transparent;
       scrollbar-width: thin;
@@ -413,6 +420,7 @@
         flex-direction: column;
         list-style: none;
         gap: 5px;
+        
       } 
     }
   }
@@ -508,7 +516,8 @@
   #settings-btn {
     transition: all 300ms;
     box-shadow: 0 0 20px -15px var(--primary-color);
-    background-color: var(--checked-task-color);
+    background-color: var(--article-color);
+    font-size: 12px;
     &:hover {
       transition: all 300ms;
       box-shadow: 0 0 20px -10px var(--primary-color);
@@ -535,7 +544,8 @@
   }
 
   #play-reset--container {
-    /* display: flex; */
+    display: flex;
+    width: 100%;
     /* flex-direction: column; */
     & button {
       width: 50%;
@@ -548,13 +558,14 @@
       font-size: large;
       box-shadow: 0 0 20px -20px var(--primary-color);
       transition: all 300ms;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       &:hover {
         box-shadow: 0 0 20px -10px var(--primary-color);
       }
     }
     #play-timer {
       background-color: var(--secondary-color);
+      /* width: 100%; */
       color: var(--white-color);
       &:hover {
         color:var(--white-color) ;
@@ -575,14 +586,43 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 15rem;
-    height: 15rem;
+    width: 250px;
+    height: 250px;
     font-size: 75px;
     background-color: var(--white-color);
     border-radius: 100%;
     color: var(--secondary-color);
-    border: 2px solid var(--secondary-color)
+    border: 2px solid var(--secondary-color);
+    z-index: 99;
   }
+
+  #time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 20px; */
+    /* width: 16rem;
+    height: 16rem; */
+    border-radius: 100%;
+    position: relative;
+  }
+
+  #behind-timer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 20px; */
+    width: 256px ;
+    height: 256px;
+    border-radius: 100%;
+    transition: all 300ms;
+    z-index: 1;
+  }
+
+
 
   /* #time-container {
     flex-direction: column;
@@ -590,6 +630,7 @@
 
   #modes-container {
     align-items: stretch;
+    width: 100%;
   }
 
   #input-container {
@@ -864,8 +905,8 @@
   const pomodoros_estimated = document.querySelector('#pomodoros-estimated')
   const tasks = document.querySelector('#tasks')
   const checked_tasks = document.querySelector('#checked-tasks')
-  const clear = document.querySelector('#clear')
   const li1 = document.querySelector('#li1')
+  const conicGradientTimer = document.querySelector('#behind-timer')
 
 
   const MODES = {
@@ -884,15 +925,9 @@
       return part1 + part2
   }
   const miStorage = JSON.parse(window.localStorage.getItem('pomoData'))
+  console.log(miStorage)
 
-  clear.addEventListener('click', (e) => {
-    // e.addEventListener
-    data.checked = []
-    data.tasks = []
-    tasks.remove()
-    checked_tasks.remove()
-    updateLocalStorage()
-  })
+ 
 
 
   let botTask
@@ -1129,7 +1164,7 @@
     shortBreaks: 0,
     longBreaks: 0,
     longBreakInterval: 4,
-    notification: true,
+    notification: false,
     theme: false
   }
 
@@ -1162,6 +1197,13 @@
     timer_shortBreak.value = miStorage.times.shortBreak
     timer_longBreak.value = miStorage.times.longBreak
     longBreak_pomodoros.value = miStorage.longBreakInterval
+
+    
+    if(Notification.permission === 'granted') {
+      notifications.checked = true
+      data.notification = true
+    }
+    
     // theme_btn.checked = miStorage.theme
     // const isNotifications = () => {
     //   if (Notification.permission === 'granted') {
@@ -1170,7 +1212,6 @@
     //     false
     //   }
     // }
-    notifications.checked = miStorage.notifications
     mapTasks(data.tasks)
     mapTasks(data.checked)
   } else {
@@ -1263,10 +1304,11 @@
   // })
   notifications.addEventListener('click', (e) => {
     if (e.target.checked) {
-      // solicitarPermisoNotificaciones()
       data.notification = true
+      solicitarPermisoNotificaciones()
     } else {
       data.notification = false
+      
     }
     updateLocalStorage()
   })
@@ -1289,12 +1331,18 @@
     pomodoro_button.classList.remove('active');
     shortBreak_button.classList.remove('active');
     longBreak_button.classList.remove('active');
+    
+    
 
     if (mode === MODES.pomodoro) {
       min = Number(data.times.pomodoro)
       timeMode = MODES.pomodoro
       pomodoro_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
+      let time = min * 60 + sec;
+      const mode = timeMode === MODES.pomodoro ? 'pomodoro' : timeMode === MODES.shortBreak ? 'shortBreak' : 'longBreak'
+      const percentage = (time / (data.times[mode] * 60)) * 100
+      conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
     }
     
     if (mode === MODES.shortBreak) {    
@@ -1302,12 +1350,20 @@
       timeMode = MODES.shortBreak
       shortBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
+      let time = min * 60 + sec;
+      const mode = timeMode === MODES.pomodoro ? 'pomodoro' : timeMode === MODES.shortBreak ? 'shortBreak' : 'longBreak'
+      const percentage = (time / (data.times[mode] * 60)) * 100
+      conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
     }
     if (mode === MODES.longBreak) {
       min = Number(data.times.longBreak)
       timeMode = MODES.longBreak
       longBreak_button.classList.add('active')
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`
+      let time = min * 60 + sec;
+      const mode = timeMode === MODES.pomodoro ? 'pomodoro' : timeMode === MODES.shortBreak ? 'shortBreak' : 'longBreak'
+      const percentage = (time / (data.times[mode] * 60)) * 100
+      conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
     }
     document.title = `Pomodoro Timer`;
 
@@ -1319,6 +1375,8 @@
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
         data.pomodoros ++
+        updateLocalStorage()
+        pomodoro_button.innerText = 'Pomodoro ' + data.pomodoros
         const firstChildTasks = tasks.firstElementChild
         const taskObj = data.tasks.find(t => t.id === firstChildTasks.id) 
         if (taskObj) {taskObj.pomodoros_completed ++}
@@ -1385,6 +1443,11 @@
 
       timer_clock.innerText = `${formatTime(min)}:${formatTime(sec)}`;
       document.title = `${formatTime(min)}:${formatTime(sec)} Pomodoro`;
+      let time = min * 60 + sec;
+      const mode = timeMode === MODES.pomodoro ? 'pomodoro' : timeMode === MODES.shortBreak ? 'shortBreak' : 'longBreak'
+      const percentage = (time / (data.times[mode] * 60)) * 100
+      console.log(time, 'time', mode)
+      conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
       
     }
   }
@@ -1421,25 +1484,26 @@
     } 
   }
 
-//   function solicitarPermisoNotificaciones() {
-//     if (Notification.permission !== 'granted') {
-//         Notification.requestPermission().then((permiso) => {
-//             if (permiso === 'granted') {
-//                 console.log('Permiso concedido');
-//             }
-//         });
-//     }
-// }
+  function solicitarPermisoNotificaciones() {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then((permiso) => {
+            if (permiso === 'granted') {
+                console.log('Permiso concedido');
+            }
+        });
+    } else {
+      console.log(Notification)
+    }
+}
 
 // Llamar a la función cuando se cargue la página
 // solicitarPermisoNotificaciones();
-
-// function notificarUsuario() {
-//     if (Notification.permission === 'granted') {
-//         new Notification('¡Tiempo terminado!', {
-//             body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
-//         });
-//     }
-// }
+function notificarUsuario() {
+    if (Notification.permission === 'granted' && data.notification) {
+        new Notification('¡Tiempo terminado!', {
+            body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
+        });
+    }
+}
 
 </script>
