@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href='img/logo.png' />
-    <meta name="Pomodoro Timer - Temporizador Pomodoro" content="Aumenta tu productividad con nuestro Pomodoro Timer Online. Temporizador gratuito con lista de tareas integrada. ¡Empieza ahora!">
-    <meta name="keywords" content="pomodoro, temporizador, timer, online, productividad, tareas, lista, app">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <title>Temporizador Pomodoro</title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1><img src='img/logo.png' alt="">Temporizador Pomodoro</h1>
-        <!-- <button onclick="notificarUsuario()">Notification</button> -->
-        <div id="nav-btns--container">
-          <button id="settings-btn"><span>Configuración</span><img src='img/settings.svg' alt="configuración"></button>
-          <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
-          <dialog id="settings-modal">
-            <div class="quit-container">
-              <button id="quit-modal--btn"><img src="img/x.svg" alt=""></button>
-            </div>
-            <form>
-              <h5>Temporizador</h5>
-              <div class="timer-settings">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href='img/logo.png' />
+  <meta name="Pomodoro Timer - Temporizador Pomodoro"
+    content="Aumenta tu productividad con nuestro Pomodoro Timer Online. Temporizador gratuito con lista de tareas integrada. ¡Empieza ahora!">
+  <meta name="keywords" content="pomodoro, temporizador, timer, online, productividad, tareas, lista, app">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <title>Temporizador Pomodoro</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h1><img src='img/logo.png' alt="">Temporizador Pomodoro</h1>
+      <!-- <button onclick="notificarUsuario()">Notification</button> -->
+      <div id="nav-btns--container">
+        <button id="settings-btn"><span>Configuración</span><img src='img/settings.svg' alt="configuración"></button>
+        <!-- <button id="profile-btn"><span>Profile</span><img src="/Public/user.svg" alt="profile"></button> -->
+        <dialog id="settings-modal">
+          <div class="quit-container">
+            <button id="quit-modal--btn"><img src="img/x.svg" alt=""></button>
+          </div>
+          <form>
+            <h5>Temporizador</h5>
+            <div class="timer-settings">
               <label for="autostart">
                 <span>Inicio automático</span>
                 <input class="checkbox-input" checked value="autostart" type="checkbox" id="autostart">
               </label>
               <label for="timer-pomodoro">
                 <span>Minutos de Pomodoro</span>
-                <input class="number-input" value="25"  type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  id="timer-pomodoro">
+                <input class="number-input" value="25" type="number" step="1"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-pomodoro">
               </label>
               <label for="timer-shortBreak">
                 <span>Minutos de descanso corto</span>
-                <input class="number-input" value="5" type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-shortBreak">
+                <input class="number-input" value="5" type="number" step="1"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-shortBreak">
               </label>
               <label for="timer-longBreak">
                 <span>Minutos de descanso largo</span>
-                <input class="number-input" value="20" type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-longBreak">
+                <input class="number-input" value="20" type="number" step="1"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="timer-longBreak">
               </label>
               <label for="long-break--pomodoros">
                 <span>Intervalo de descansos largos</span>
-                <input class="number-input" value="4" type="number" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="long-break--pomodoros">
+                <input class="number-input" value="4" type="number" step="1"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="long-break--pomodoros">
               </label>
             </div>
             <!-- <h5>Appearance</h5>
@@ -61,31 +70,31 @@
                 <input class="checkbox-input" value="notifications" type="checkbox" id="notifications">
               </label>
             </div>
-            </form>
-          </dialog>
-        </div>
-      </nav>
-    </header>
-    <main>
-      <div class="first-container">
+          </form>
+        </dialog>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="first-container">
       <article class='timer-container'>
-          <div id="modes-container">
-            <button id="pomodoro" class="active" onclick="selectMode('POMODORO')">Pomodoros 0</button>
-            <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Descansos cortos 0</button>
-            <button id="longBreak" onclick="selectMode('LONG_BREAK')">Descansos largos 0</button>
+        <div id="modes-container">
+          <button id="pomodoro" class="active" onclick="selectMode('POMODORO')">Pomodoros 0</button>
+          <button id="shortBreak" onclick="selectMode('SHORT_BREAK')">Descansos cortos 0</button>
+          <button id="longBreak" onclick="selectMode('LONG_BREAK')">Descansos largos 0</button>
+        </div>
+        <div id="time-block">
+          <div id="time-container">
+            <span id='timer'>25:00</span>
           </div>
-          <div id="time-block">
-            <div id="time-container">
-              <span id='timer'>25:00</span>
-            </div>
-            <div id="behind-timer">
-            </div>
+          <div id="behind-timer">
+          </div>
 
-          </div>
-          <div id="play-reset--container">
-            <button id='play-timer' onclick="startTimer()">Iniciar</button>
-            <button id='reset-timer' onclick="resetTimer()">Reiniciar</button>
-          </div>
+        </div>
+        <div id="play-reset--container">
+          <button id='play-timer' onclick="startTimer()">Iniciar</button>
+          <button id='reset-timer' onclick="resetTimer()">Reiniciar</button>
+        </div>
       </article>
       <article class="tasks-container">
         <h2>Tareas</h2>
@@ -125,53 +134,70 @@
 
     <div class="second-container">
       <section>
-      <h1>⏳Temporizador Pomodoro Online – Mejora tu Productividad con el Mejor Reloj Pomodoro</h1>
-      <p>
-        ¿Sientes que el tiempo se te escapa sin lograr terminar tus tareas? Nuestra app de Pomodoro gratuita te ayuda a enfocarte, organizarte y aumentar tu productividad. Con un temporizador Pomodoro online y una lista de tareas editable, podrás gestionar mejor tu tiempo y completar tus proyectos sin distracciones.
-      </p>
-    </section>
-  </div>
-  <div>
-    <section>
-      <h2>🎯 ¿Qué es el Método Pomodoro y por qué es tan efectivo?</h2>
-      <p>El Método Pomodoro divide tu trabajo en sesiones de 25 minutos seguidas de breves descansos, optimizando la concentración y evitando la fatiga mental. Numerosos estudios han demostrado que este sistema reduce la procrastinación y mejora el rendimiento.</p>
-    </section>
-  </div>
-  <div>
-    <section>
-      <h2>🔥 Funciones Clave de Nuestra App Pomodoro:</h2>
-      <ul>
-        <li>✔️ Temporizador Pomodoro gratuito y personalizable</li>
-        <li>✔️ Lista de tareas integrada y editable 📝</li>
-        <li>✔️ Seguimiento de sesiones completadas 📊</li>
-        <li>✔️ Interfaz simple, rápida y sin distracciones 🖥️</li>
-        <li>✔️ Modo oscuro para cuidar tu vista 🌙</li>
-      </ul>
-    </section>
-  </div>
-  <div>
-    <section>
-      <h2>🚀 Aumenta tu Productividad con el Mejor Temporizador Pomodoro Online</h2>
-      <p>Ya seas estudiante, programador, escritor o simplemente quieras gestionar mejor tu tiempo, este Temporizador Pomodoro Online es la herramienta ideal para ti. Empieza a trabajar de manera más inteligente, efectiva y sin estrés.</p>
-      <h3>✨ ¡Pruébalo ahora gratis y revoluciona tu forma de trabajar! ✨</h3>
-    </section>
-  </div>
-      <footer>
-        <a href="https://github.com/imDorian/pomodorotimer" target="_blank" rel="noopener noreferrer">Desarrollado por Dorian &nbsp; <img src="img/github.svg" alt=""></a>
-      </footer>
-    </main>
-  </body>
+        <h1>⏳Temporizador Pomodoro Online – Mejora tu Productividad con el Mejor Reloj Pomodoro</h1>
+
+        <p>¿Sientes que el <strong>tiempo</strong> se te escapa sin lograr terminar tus tareas? Nuestra <strong>app de
+            Pomodoro gratuita</strong> te ayuda a <strong>enfocarte</strong>, <strong>organizarte</strong> y aumentar tu
+          <strong>productividad</strong>. Con un <strong>temporizador Pomodoro online</strong> y una <strong>lista de
+            tareas editable</strong>, podrás gestionar mejor tu <strong>tiempo</strong> y completar tus proyectos sin
+          <strong>distraerte</strong>.
+        </p>
+      </section>
+    </div>
+    <div>
+      <section>
+        <h2>🎯 ¿Qué es el Método Pomodoro y por qué es tan efectivo?</h2>
+        <p>El <strong>Método Pomodoro</strong> divide tu trabajo en sesiones de <strong>25 minutos</strong> seguidas de
+          breves <strong>descansos</strong>, optimizando la <strong>concentración</strong> y evitando la <strong>fatiga
+            mental</strong>. Numerosos estudios han demostrado que este sistema reduce la
+          <strong>procrastinación</strong> y mejora el <strong>rendimiento</strong>.
+        </p>
+
+      </section>
+    </div>
+    <div>
+      <section>
+        <h2>🔥 Funciones Clave de Nuestra App Pomodoro:</h2>
+        <ul>
+          <li>✔️ <strong>Temporizador Pomodoro gratuito</strong> y personalizable</li>
+          <li>✔️ <strong>Lista de tareas integrada</strong> y editable 📝</li>
+          <li>✔️ <strong>Seguimiento de sesiones completadas</strong> 📊</li>
+          <li>✔️ <strong>Interfaz simple</strong>, rápida y sin distracciones 🖥️</li>
+          <!-- <li>✔️ <strong>Modo oscuro</strong> para cuidar tu vista 🌙</li> -->
+          <li>✔️ <strong>Notificaciones</strong> para recordarte tus descansos ⏰</li>
+        </ul>
+
+      </section>
+    </div>
+    <div id="last-container">
+      <section>
+        <h2>🚀 Aumenta tu Productividad con el Mejor Temporizador Pomodoro Online</h2>
+        <p>Ya seas <strong>estudiante</strong>, <strong>programador</strong>, <strong>escritor</strong> o simplemente
+          quieras gestionar mejor tu <strong>tiempo</strong>, este <strong>Temporizador Pomodoro Online</strong> es la
+          herramienta ideal para ti. Empieza a trabajar de manera más <strong>inteligente</strong>,
+          <strong>efectiva</strong> y sin <strong>estrés</strong>.
+        </p>
+
+        <h3>✨ ¡Pruébalo ahora gratis y revoluciona tu forma de trabajar! ✨</h3>
+      </section>
+    </div>
+    <footer>
+      <a href="https://github.com/imDorian/pomodorotimer" target="_blank" rel="noopener noreferrer">Desarrollado por
+        Dorian &nbsp; <img src="img/github.svg" alt=""></a>
+    </footer>
+  </main>
+</body>
+
 </html>
 
 <style>
-
   :root {
     --primary-color: #003057;
     --secondary-color: #fd7652;
     --third-color: #982b42;
     --white-color: #ffffff;
     --red-color: rgb(223, 66, 66);
-    --blue--color:#3F5468;
+    --blue--color: #3F5468;
     --checked-task-color: #80808038;
     --article-color: #f5f5f5;
   }
@@ -184,6 +210,7 @@
     padding: 0;
     font-family: "Inter", sans-serif;
   }
+
   button {
     border-radius: 20px;
     padding: 10px;
@@ -195,11 +222,12 @@
     /* border-bottom: 1px solid #3F5468; */
     font-size: 16px;
     font-weight: 600;
+
     &:hover {
-        transition: all 300ms;
-        background-color: var(--primary-color);
-        color: var(--white-color);
-        /* border-radius: 6px; */
+      transition: all 300ms;
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      /* border-radius: 6px; */
     }
   }
 
@@ -215,24 +243,27 @@
     backdrop-filter: blur(5px);
 
     z-index: 99;
+
     & h1 {
-        background-color: transparent;
-        border-radius: 12px;
-        /* border: 2px solid #C51605; */
-        padding-inline: 10px;
-        padding-block: 5px;
-        color: var(--primary-color);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        /* width: 100%; */
-        img {
-          width: 50px;
-          height: 50px;
-        }
+      background-color: transparent;
+      border-radius: 12px;
+      /* border: 2px solid #C51605; */
+      padding-inline: 10px;
+      padding-block: 5px;
+      color: var(--primary-color);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      /* width: 100%; */
+      img {
+        width: 50px;
+        height: 50px;
+      }
     }
+
     & nav {
       display: flex;
       flex-direction: row;
@@ -240,7 +271,7 @@
       justify-content: space-around;
       width: 100%;
       height: 70px;
-      padding: 10px ;
+      padding: 10px;
       /* background-color: rgba(228, 228, 228, 0.8); */
       /* backdrop-filter: blur(1px); */
 
@@ -253,7 +284,7 @@
         flex-direction: row;
         gap: 10px;
       }
-      
+
       & button {
         font-size: 10px;
         font-weight: 600;
@@ -268,9 +299,11 @@
         padding-inline: 8px;
         box-shadow: 0 0 20px -150px var(--primary-color);
         transition: all 300ms;
+
         span {
           display: none;
         }
+
         &:hover {
           transition: ease-in-out 300ms;
           /* background-color: #va; */
@@ -279,6 +312,7 @@
         }
       }
     }
+
     /* &::after {
       content: "";
       background-color: #3F5468;
@@ -291,7 +325,7 @@
   body {
     /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-family: "Inter", sans-serif;
-      /* font-size: 1px; */
+    /* font-size: 1px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -303,21 +337,27 @@
     /* padding-top: 100px; */
     /* box-sizing:content-box; */
   }
+
   main {
     width: 100%;
     display: grid;
     justify-items: center;
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
+    /* display: flex;
+    flex-direction: column; */
+
     p {
       margin: 0;
       padding: 0;
+      /* text-wrap: pretty;
+      hyphenate-limit-chars: 7; */
     }
-   
+
   }
 
   ::-webkit-scrollbar {
-  display: none;
-}
+    display: none;
+  }
 
   .first-container {
     display: flex;
@@ -326,31 +366,48 @@
     gap: 20px;
     width: 100%;
     max-width: 1000px;
+    margin-top: 100px;
   }
-  .second-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap:30px;
-    /* width: 60%; */
-    max-width: 550px;
-    section {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      ul {
-        padding:none;
-        margin: none;
-        list-style: none;
-      }
+
+  #last-container {
+    margin-bottom: 300px;
+
+    h3 {
+      padding-top: 50px;
     }
   }
+
+  main div section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 100px;
+    padding-inline: 30px;
+
+    ul {
+      list-style: none;
+      /* padding-left: 0px; */
+    }
+
+    p {
+      font-size: 1.1rem;
+      /* Tamaño de fuente ligeramente más grande */
+      max-width: 700px;
+      /* Evita líneas demasiado largas */
+
+      /* Alineación justificada para una apariencia más ordenada */
+    }
+  }
+
 
   article {
     display: flex;
     align-items: center;
-    justify-content: center ;
+    justify-content: center;
     border: 1px solid var(--article-color);
     width: 95%;
     max-width: 600px;
@@ -377,24 +434,26 @@
       color: var(--primary-color);
     }
   }
-  
+
   .timer-container {
     flex-direction: column;
     justify-content: space-around;
     gap: 50px;
     height: 500px;
+
     & div {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        /* width: 100%; */
-        gap: 20px;
-        & button {
-            width: 35%;
-            font-size: 16px;
-            font-weight: 500;
-        }
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      /* width: 100%; */
+      gap: 20px;
+
+      & button {
+        width: 35%;
+        font-size: 16px;
+        font-weight: 500;
+      }
     }
   }
 
@@ -404,10 +463,12 @@
     gap: 10px;
     /* position: relative; */
     height: 500px;
+
     /* position: relative; */
     h2 {
       color: var(--secondary-color);
     }
+
     ul {
       width: 100%;
       display: flex;
@@ -424,7 +485,7 @@
       padding-inline: 10px;
       /* box-shadow: inset 0 0 20px -10px #3F5468; */
       /* position: relative; */
-      
+
       li {
         background-color: var(--white-color);
         width: 100%;
@@ -441,36 +502,43 @@
         position: relative;
         transition: all 300ms;
         box-shadow: 0 0 10px -10px var(--primary-color);
+
         &:hover {
-          .trash-btn, .edit-btn {
+
+          .trash-btn,
+          .edit-btn {
             display: flex;
           }
         }
+
         button {
           border: none;
         }
+
         .check-button {
           border-radius: 500%;
           display: flex;
           align-items: center;
           cursor: pointer;
-          background-color:var(--white-color);
+          background-color: var(--white-color);
           color: var(--white-color);
           background-image: url("img/x.svg");
           width: 24px;
           height: 24px;
           appearance: none;
           border: 1px solid var(--checked-task-color);
-          background-position: -2rem ;
+          background-position: -2rem;
           background-size: 100%;
           background-repeat: no-repeat;
-          transition: all 200ms ; 
+          transition: all 200ms;
         }
+
         .check-button:checked {
           /* background-color: var(--primary-color); */
           /* color: rgb(75, 156, 13); */
           background-position: 0 0;
         }
+
         .task {
           resize: none;
           field-sizing: content;
@@ -486,6 +554,7 @@
           color: var(--blue--color);
           scrollbar-color: var(--primary-color) transparent;
           scrollbar-width: none;
+
           &:enabled {
             background-color: var(--white-color);
             color: var(--primary-color);
@@ -493,19 +562,21 @@
             padding-right: 80px;
           }
         }
-    
+
       }
-      #tasks, #checked-tasks {
+
+      #tasks,
+      #checked-tasks {
         width: 100%;
         display: flex;
         flex-direction: column;
         list-style: none;
         gap: 5px;
-        
-      } 
+
+      }
     }
   }
-  
+
 
   .isEditTask {
     background-color: var(--checked-task-color) !important;
@@ -517,34 +588,37 @@
     text-align: start;
     display: none;
     color: var(--checked-task-color);
+
     &:hover {
       background-color: transparent;
       color: var(--primary-color);
     }
   }
 
-  .trash-btn, .edit-btn {
+  .trash-btn,
+  .edit-btn {
     z-index: 99;
-      background-color: var(--white-color) !important;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      height: 30px;
-      padding: 15px;
-      width: 30px;
-      box-shadow: 0 0 15px -10px black;
+    background-color: var(--white-color) !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 30px;
+    padding: 15px;
+    width: 30px;
+    box-shadow: 0 0 15px -10px black;
+    border: 1px solid var(--checked-task-color) !important;
+
+    &:hover {
+      background-color: #e4e4e4 !important;
       border: 1px solid var(--checked-task-color) !important;
-      &:hover {
-        background-color: #e4e4e4 !important;
-        border: 1px solid var(--checked-task-color) !important;
-      }
+    }
   }
 
   .task-options--active {
     display: inline;
   }
-  
+
   .options-container {
     display: flex;
     position: absolute;
@@ -555,6 +629,7 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+
     .pomodoros-completed {
       position: absolute;
       top: 0;
@@ -571,8 +646,10 @@
       gap: 10px;
       /* width: auto; */
     }
+
     .inputs-pomodoros-completed {
       display: none;
+
       input {
         width: 35px;
         height: 35px;
@@ -599,18 +676,20 @@
     box-shadow: 0 0 20px -15px var(--primary-color);
     background-color: var(--article-color);
     font-size: 12px;
+
     &:hover {
       transition: all 300ms;
       box-shadow: 0 0 20px -10px var(--primary-color);
     }
   }
 
- 
+
   #taskInput-container {
     display: flex;
     flex-direction: row;
     width: 100%;
   }
+
   #pomodoros-estimated {
     border: 0;
     width: 20%;
@@ -627,6 +706,7 @@
   #play-reset--container {
     display: flex;
     width: 100%;
+
     /* flex-direction: column; */
     & button {
       width: 50%;
@@ -640,22 +720,28 @@
       box-shadow: 0 0 20px -20px var(--primary-color);
       transition: all 300ms;
       letter-spacing: 1px;
+
       &:hover {
         box-shadow: 0 0 20px -10px var(--primary-color);
       }
     }
+
     #play-timer {
       background-color: var(--secondary-color);
       /* width: 100%; */
       color: var(--white-color);
+
       &:hover {
-        color:var(--white-color) ;
+        color: var(--white-color);
       }
+
       /* border: 1px solid #3F5468; */
     }
+
     #reset-timer {
       background-color: var(--primary-color);
       color: var(--white-color);
+
       &:hover {
         color: var(--white-color);
       }
@@ -696,7 +782,7 @@
     align-items: center;
     justify-content: center;
     /* gap: 20px; */
-    width: 256px ;
+    width: 256px;
     height: 256px;
     border-radius: 100%;
     transition: all 300ms;
@@ -724,6 +810,7 @@
     padding: 5px;
     border-radius: 10px;
     font-weight: 500;
+
     input {
       color: var(--primary-color);
       border: none;
@@ -737,26 +824,29 @@
       outline: none;
       resize: none;
       transition: all 300ms;
+
       &:focus {
         /* height: 60px; */
         box-shadow: var(--primary-color) 0 0 20px -10px;
         z-index: 99;
       }
     }
+
     button {
-          width: 20%;
-          border-radius: 0;
-          border-top-right-radius: 12px;
-          border-bottom-right-radius: 12px;
-          text-align: center;
-          font-size: 12px;
-          border: none;
-          background-color: var(--primary-color);
-          color: var(--white-color);
-          &:hover {
-            background-color: var(--secondary-color);
-          }
-        }
+      width: 20%;
+      border-radius: 0;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      text-align: center;
+      font-size: 12px;
+      border: none;
+      background-color: var(--primary-color);
+      color: var(--white-color);
+
+      &:hover {
+        background-color: var(--secondary-color);
+      }
+    }
   }
 
   .active {
@@ -790,18 +880,22 @@
     transition: all 300ms;
     background: var(--checked-task-color) !important;
     border: 2px solid var(--white-color);
+
     .task {
       text-decoration: line-through 2px;
       color: var(--checked-task-color) !important;
     }
+
     .pomodoros-completed {
       /* color:var(--checked-task-color) !important; */
       /* text-decoration: overline; */
       text-decoration: line-through 2px;
     }
+
     button {
       color: var(--checked-task-color);
       background-color: transparent;
+
       &:hover {
         color: var(--white-color);
       }
@@ -827,16 +921,19 @@
     box-shadow: 0 0 20px -10px var(--primary-color);
     /* height: 50%; */
     transform: translate(-50%, -50%);
+
     .quit-container {
       width: 100%;
       display: flex;
       justify-content: flex-end;
       padding-inline: 20px;
+
       button {
         border: none;
         width: 24px;
         height: 24px;
         background-color: transparent;
+
         &:hover {
           background-color: var(--secondary-color);
         }
@@ -853,9 +950,11 @@
       font-size: 20px;
       color: var(--primary-color);
       justify-content: center;
+
       h5 {
         margin-bottom: 8px;
       }
+
       div {
         display: flex;
         flex-direction: column;
@@ -872,30 +971,35 @@
           margin-block: 20px;
         } */
       }
+
       label {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         text-align: start;
+
         span {
           text-wrap: wrap;
           width: 70%;
         }
+
         .number-input {
           width: 48px;
           height: 24px;
           border: none;
           border-radius: 3px;
-          outline: none ;
+          outline: none;
           text-align: center;
           font-size: 20px;
           color: var(--primary-color);
           background-color: var(--article-color);
+
           &:focus {
             box-shadow: 0 0 20px -10px var(--primary-color);
           }
         }
+
         .checkbox-input {
           display: flex;
           align-items: center;
@@ -910,9 +1014,10 @@
           background-image: url('img/buttonOptions.svg');
           background-repeat: no-repeat;
           background-size: 50%;
-          background-position: 0px ;
+          background-position: 0px;
           transition: all 300ms;
           box-shadow: 0 0 20px -10px var(--primary-color);
+
           &:checked {
             background-color: #7ec499;
             background-position: 24px;
@@ -923,18 +1028,19 @@
     }
   }
 
-  
+
 
   @media screen and (min-width: 900px) {
     main {
-      /* flex-direction: row; */
+      /* flex-direction: row;
+      */
       /* align-items: stretch; */
-      height: 100vh; 
+      height: 100vh;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
     }
 
-    main > div {
+    main>div {
       height: 100vh;
       scroll-snap-align: start;
       display: grid;
@@ -942,24 +1048,31 @@
       max-width: 600px;
       /* gap: 50px; */
       font-size: larger;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      /* width: 60%; */
+      max-width: 550px;
+
       section {
-        h2, h1 {
+
+        h2,
+        h1 {
           text-align: center;
         }
+
         p {
           border-radius: 16px;
           background-color: var(--article-color);
           padding: 20px;
         }
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 60px;
-        /* width: 60%; */
-        max-width: 550px;
+
+
+
         ul {
-          padding:none;
+          padding: none;
           margin: none;
           list-style: none;
           border-radius: 16px;
@@ -967,37 +1080,57 @@
           padding: 20px;
         }
       }
+
       h3 {
         /* margin-top: 80px; */
         text-align: center;
         padding: 0;
         margin: 0;
+        /* margin-top: 50px; */
       }
     }
+
     .timer-container {
       width: 50%;
       max-width: 500px;
     }
+
     .tasks-container {
       width: 40%;
       max-width: 400px;
     }
-    .first-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: row;
-      height: 70dvh;
 
+    .first-container {
+      flex-direction: row;
+      margin-top: 0px;
       gap: 20px;
       scroll-snap-align: start;
-      height: 100vh;
+
     }
-    /* .second-container {
-      scroll-snap-align: start;
-      height: 100vh;
-    } */
+
+    .second-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      /* width: 60%; */
+      max-width: 550px;
+
+      section {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        ul {
+          padding: none;
+          margin: none;
+          list-style: none;
+        }
+      }
+    }
   }
+
   @media screen and (min-width: 500px) {
     header::after {
       content: '';
@@ -1005,6 +1138,7 @@
       width: 90%;
       background-color: #3f546825;
     }
+
     nav {
       div {
         button {
@@ -1013,6 +1147,7 @@
           }
         }
       }
+
       &::after {
         background-color: transparent;
       }
@@ -1054,20 +1189,20 @@
     shortBreak: 'SHORT_BREAK',
     longBreak: 'LONG_BREAK'
   }
-  
+
   function updateLocalStorage() {
     window.localStorage.setItem('pomoData', JSON.stringify(data))
     console.log(data)
   }
-  function generateId () {
-      const part1 = Date.now().toString(35)
-      const part2 = Math.random().toString(36).slice(2)
-      return part1 + part2
+  function generateId() {
+    const part1 = Date.now().toString(35)
+    const part2 = Math.random().toString(36).slice(2)
+    return part1 + part2
   }
   const miStorage = JSON.parse(window.localStorage.getItem('pomoData'))
   console.log(miStorage)
 
- 
+
 
 
   let botTask
@@ -1120,177 +1255,177 @@
 
   const createTask = (task) => {
     const li = document.createElement('li')
-      const label = document.createElement('label')
-      const inputLabel = document.createElement('input')
-      const taskInput = document.createElement('textarea')
-      const optionsButton = document.createElement('button')
-      const deleteButton = document.createElement('button')
-      const trashImg = document.createElement('img')
-      const pomodorosSpan = document.createElement('span')
-      const optionsContainer = document.createElement('div')
-      const editBtn = document.createElement('button')
-      const editPen = document.createElement('img')
-      const pomodorosCompletedInput = document.createElement('input')
-      const pomodorosEstimatedInput = document.createElement('input')
-      const pomodorosContainer = document.createElement('div')
+    const label = document.createElement('label')
+    const inputLabel = document.createElement('input')
+    const taskInput = document.createElement('textarea')
+    const optionsButton = document.createElement('button')
+    const deleteButton = document.createElement('button')
+    const trashImg = document.createElement('img')
+    const pomodorosSpan = document.createElement('span')
+    const optionsContainer = document.createElement('div')
+    const editBtn = document.createElement('button')
+    const editPen = document.createElement('img')
+    const pomodorosCompletedInput = document.createElement('input')
+    const pomodorosEstimatedInput = document.createElement('input')
+    const pomodorosContainer = document.createElement('div')
 
-      li.draggable = true
+    li.draggable = true
 
-      li.addEventListener('dragstart', (e) => {
-        li.classList.add('is-dragging')
-      })
-      li.addEventListener('dragend', (e) => {
-        li.classList.remove('is-dragging')
-      })
+    li.addEventListener('dragstart', (e) => {
+      li.classList.add('is-dragging')
+    })
+    li.addEventListener('dragend', (e) => {
+      li.classList.remove('is-dragging')
+    })
 
-      document.addEventListener('click', (e) => {
-        if (!li.contains(e.target)) {
-          editBtn.style = 'display: true'
-          deleteButton.style = 'display: true'
-          optionsButton.style = 'display: true'
-          label.style = 'display: true'
-          // taskInput.autofocus = true
-          taskInput.disabled = true
-          pomodorosContainer.style = 'display: none'
-          pomodorosSpan.style = 'display: flex'
-          li.classList.remove('isEditTask')
-          const oldTask = data.tasks.find(t => t.id === li.id) ?? false
-          // console.log(li.id, oldTask.id, taskInput.value)
-          if (oldTask !== false && oldTask.task !== taskInput.value) {
-            // console.log(oldTask.task)
-            oldTask.task = taskInput.value
-            console.log(oldTask.task)
-            console.log(data)
-            updateLocalStorage()
-          }
-          if (oldTask !== false && parseInt(oldTask.pomodoros_completed) !== parseInt(pomodorosCompletedInput.value) || oldTask !== false &&  parseInt(oldTask.pomodoros_estimated) !== parseInt(pomodorosEstimatedInput.value)) {
-            console.log(oldTask.pomodoros_completed, parseInt(pomodorosCompletedInput.value), 'pomodoros completed')
-            console.log(oldTask.pomodoros_estimated, parseInt(pomodorosEstimatedInput.value), 'pomodoros estimated')
-            oldTask.pomodoros_completed = parseInt(pomodorosCompletedInput.value)
-            oldTask.pomodoros_estimated = parseInt(pomodorosEstimatedInput.value)
-            pomodorosSpan.textContent = `${pomodorosCompletedInput.value}/${pomodorosEstimatedInput.value}`
-            updateLocalStorage()
-          }
-        }
-      })
-
-      deleteButton.addEventListener('click', (e) => {
-        if (task.checked) {
-          checked_tasks.removeChild(li)
-          const newList = data.checked.filter(t => t.id !== task.id)
-          data.checked = newList
-          updateLocalStorage()
-
-        } else {
-          tasks.removeChild(li)
-          const newList = data.tasks.filter(t => t.id !== task.id)
-          data.tasks = newList
+    document.addEventListener('click', (e) => {
+      if (!li.contains(e.target)) {
+        editBtn.style = 'display: true'
+        deleteButton.style = 'display: true'
+        optionsButton.style = 'display: true'
+        label.style = 'display: true'
+        // taskInput.autofocus = true
+        taskInput.disabled = true
+        pomodorosContainer.style = 'display: none'
+        pomodorosSpan.style = 'display: flex'
+        li.classList.remove('isEditTask')
+        const oldTask = data.tasks.find(t => t.id === li.id) ?? false
+        // console.log(li.id, oldTask.id, taskInput.value)
+        if (oldTask !== false && oldTask.task !== taskInput.value) {
+          // console.log(oldTask.task)
+          oldTask.task = taskInput.value
+          console.log(oldTask.task)
+          console.log(data)
           updateLocalStorage()
         }
-      })
-
-      optionsButton.addEventListener('click', (e) => {
-        console.log(deleteButton.style.display)
-        if (deleteButton.style.display === "none" && editBtn.style.display === 'none') {
-          deleteButton.style.display = 'inline'
-          editBtn.style.display = 'inline'
-        } else {
-          deleteButton.style.display = 'none'
-          editBtn.style.display = 'none'
-        }
-      })
-
-      editBtn.addEventListener('click', (e) => {
-        editBtn.style = 'display: none'
-        deleteButton.style = 'display: none'
-        optionsButton.style = 'display: none'
-        label.style = 'display: none'
-        pomodorosSpan.style = 'display: none'
-        pomodorosContainer.style = 'display: flex'
-        taskInput.disabled = false
-        li.classList.toggle('isEditTask')
-      })
-
-      inputLabel.addEventListener('click', (e) => {
-        if (task.checked === false) {
-          tasks.removeChild(li)
-          task.checked = true
-          li.classList.add('checked-task')
-          const newList = data.tasks.filter(t => t.id !== task.id)
-          data.tasks = newList
-          data.checked.unshift(task)
-          checked_tasks.insertBefore(li, checked_tasks.firstChild)
-          updateLocalStorage()
-        } else {
-          checked_tasks.removeChild(li)
-          task.checked = false
-          li.classList.remove('checked-task')
-          const newList = data.checked.filter(t => t.id !== task.id)
-          data.checked = newList
-          data.tasks.push(task)
-          tasks.appendChild(li)
+        if (oldTask !== false && parseInt(oldTask.pomodoros_completed) !== parseInt(pomodorosCompletedInput.value) || oldTask !== false && parseInt(oldTask.pomodoros_estimated) !== parseInt(pomodorosEstimatedInput.value)) {
+          console.log(oldTask.pomodoros_completed, parseInt(pomodorosCompletedInput.value), 'pomodoros completed')
+          console.log(oldTask.pomodoros_estimated, parseInt(pomodorosEstimatedInput.value), 'pomodoros estimated')
+          oldTask.pomodoros_completed = parseInt(pomodorosCompletedInput.value)
+          oldTask.pomodoros_estimated = parseInt(pomodorosEstimatedInput.value)
+          pomodorosSpan.textContent = `${pomodorosCompletedInput.value}/${pomodorosEstimatedInput.value}`
           updateLocalStorage()
         }
-      })
-      
-
-      pomodorosCompletedInput.type = 'number'
-      pomodorosEstimatedInput.type = 'number'
-      pomodorosCompletedInput.value = task.pomodoros_completed
-      pomodorosEstimatedInput.value = task.pomodoros_estimated
-
-      pomodorosContainer.appendChild(pomodorosCompletedInput)
-      // pomodorosContainer.innerText = '/'
-      pomodorosContainer.appendChild(pomodorosEstimatedInput)
-      pomodorosContainer.classList.add('inputs-pomodoros-completed')
-      pomodorosContainer.style = 'display: none'
-      editBtn.classList.add('edit-btn')
-      editPen.src = 'img/editPencil.svg'
-      editBtn.appendChild(editPen)
-      optionsContainer.classList.add('options-container')
-      pomodorosSpan.classList.add('pomodoros-completed')
-      pomodorosSpan.innerText = task.pomodoros_completed + '/' + task.pomodoros_estimated
-      label.for = 'check-button'
-      inputLabel.classList.add('check-button')
-      inputLabel.type = 'checkbox'
-      trashImg.src = 'img/trash.svg'
-      deleteButton.appendChild(trashImg)
-      optionsButton.textContent = '...'
-      // deleteButton.style = 'display: none'
-      // editBtn.style = 'display: none'
-      taskInput.value = task.task
-      taskInput.classList.add('task')
-      taskInput.disabled = true
-      if (task.checked) {
-        inputLabel.checked = true
       }
-      label.appendChild(inputLabel)
-      li.classList.add('task-container')
-      li.appendChild(label)
-      li.appendChild(taskInput)
-      optionsButton.classList.add('task-options--btn')
-      deleteButton.classList.add('trash-btn')
-      optionsContainer.appendChild(pomodorosSpan)
-      optionsContainer.appendChild(pomodorosContainer)
-      optionsContainer.appendChild(optionsButton)
-      optionsContainer.appendChild(deleteButton)
-      optionsContainer.appendChild(editBtn)
-      li.appendChild(optionsContainer)
-      li.id = task.id
+    })
+
+    deleteButton.addEventListener('click', (e) => {
       if (task.checked) {
-        li.classList.add('checked-task')
-        checked_tasks.appendChild(li)
+        checked_tasks.removeChild(li)
+        const newList = data.checked.filter(t => t.id !== task.id)
+        data.checked = newList
+        updateLocalStorage()
+
       } else {
-        tasks.appendChild(li)
+        tasks.removeChild(li)
+        const newList = data.tasks.filter(t => t.id !== task.id)
+        data.tasks = newList
+        updateLocalStorage()
       }
+    })
+
+    optionsButton.addEventListener('click', (e) => {
+      console.log(deleteButton.style.display)
+      if (deleteButton.style.display === "none" && editBtn.style.display === 'none') {
+        deleteButton.style.display = 'inline'
+        editBtn.style.display = 'inline'
+      } else {
+        deleteButton.style.display = 'none'
+        editBtn.style.display = 'none'
+      }
+    })
+
+    editBtn.addEventListener('click', (e) => {
+      editBtn.style = 'display: none'
+      deleteButton.style = 'display: none'
+      optionsButton.style = 'display: none'
+      label.style = 'display: none'
+      pomodorosSpan.style = 'display: none'
+      pomodorosContainer.style = 'display: flex'
+      taskInput.disabled = false
+      li.classList.toggle('isEditTask')
+    })
+
+    inputLabel.addEventListener('click', (e) => {
+      if (task.checked === false) {
+        tasks.removeChild(li)
+        task.checked = true
+        li.classList.add('checked-task')
+        const newList = data.tasks.filter(t => t.id !== task.id)
+        data.tasks = newList
+        data.checked.unshift(task)
+        checked_tasks.insertBefore(li, checked_tasks.firstChild)
+        updateLocalStorage()
+      } else {
+        checked_tasks.removeChild(li)
+        task.checked = false
+        li.classList.remove('checked-task')
+        const newList = data.checked.filter(t => t.id !== task.id)
+        data.checked = newList
+        data.tasks.push(task)
+        tasks.appendChild(li)
+        updateLocalStorage()
+      }
+    })
+
+
+    pomodorosCompletedInput.type = 'number'
+    pomodorosEstimatedInput.type = 'number'
+    pomodorosCompletedInput.value = task.pomodoros_completed
+    pomodorosEstimatedInput.value = task.pomodoros_estimated
+
+    pomodorosContainer.appendChild(pomodorosCompletedInput)
+    // pomodorosContainer.innerText = '/'
+    pomodorosContainer.appendChild(pomodorosEstimatedInput)
+    pomodorosContainer.classList.add('inputs-pomodoros-completed')
+    pomodorosContainer.style = 'display: none'
+    editBtn.classList.add('edit-btn')
+    editPen.src = 'img/editPencil.svg'
+    editBtn.appendChild(editPen)
+    optionsContainer.classList.add('options-container')
+    pomodorosSpan.classList.add('pomodoros-completed')
+    pomodorosSpan.innerText = task.pomodoros_completed + '/' + task.pomodoros_estimated
+    label.for = 'check-button'
+    inputLabel.classList.add('check-button')
+    inputLabel.type = 'checkbox'
+    trashImg.src = 'img/trash.svg'
+    deleteButton.appendChild(trashImg)
+    optionsButton.textContent = '...'
+    // deleteButton.style = 'display: none'
+    // editBtn.style = 'display: none'
+    taskInput.value = task.task
+    taskInput.classList.add('task')
+    taskInput.disabled = true
+    if (task.checked) {
+      inputLabel.checked = true
+    }
+    label.appendChild(inputLabel)
+    li.classList.add('task-container')
+    li.appendChild(label)
+    li.appendChild(taskInput)
+    optionsButton.classList.add('task-options--btn')
+    deleteButton.classList.add('trash-btn')
+    optionsContainer.appendChild(pomodorosSpan)
+    optionsContainer.appendChild(pomodorosContainer)
+    optionsContainer.appendChild(optionsButton)
+    optionsContainer.appendChild(deleteButton)
+    optionsContainer.appendChild(editBtn)
+    li.appendChild(optionsContainer)
+    li.id = task.id
+    if (task.checked) {
+      li.classList.add('checked-task')
+      checked_tasks.appendChild(li)
+    } else {
+      tasks.appendChild(li)
+    }
   }
 
-  function mapTasks (tasksArray) {
+  function mapTasks(tasksArray) {
     for (const task of tasksArray) {
       createTask(task)
     }
   }
-  
+
   const data = {
     times: {
       pomodoro: 25,
@@ -1338,12 +1473,12 @@
     timer_longBreak.value = miStorage.times.longBreak
     longBreak_pomodoros.value = miStorage.longBreakInterval
 
-    
-    if(Notification.permission === 'granted') {
+
+    if (Notification.permission === 'granted') {
       notifications.checked = true
       data.notification = true
     }
-    
+
     // theme_btn.checked = miStorage.theme
     // const isNotifications = () => {
     //   if (Notification.permission === 'granted') {
@@ -1363,7 +1498,7 @@
       console.error(error)
     }
   }
-  
+
 
 
   add_task.addEventListener('click', (e) => {
@@ -1373,12 +1508,12 @@
     const estimatedPomo = Number(pomodoros_estimated.value)
     console.log(estimatedPomo)
     const task = {
-        id: generateId(),
-        task: newValue,
-        pomodoros_completed: 0,
-        pomodoros_estimated: estimatedPomo,
-        checked: false
-      }
+      id: generateId(),
+      task: newValue,
+      pomodoros_completed: 0,
+      pomodoros_estimated: estimatedPomo,
+      checked: false
+    }
 
     if (newValue.length > 0) {
       createTask(task)
@@ -1406,7 +1541,7 @@
     updateLocalStorage()
   })
   quitModal_btn.addEventListener('click', (e) => {
-  
+
     settingsModal.close()
   })
   longBreak_pomodoros.addEventListener('input', (e) => {
@@ -1448,7 +1583,7 @@
       solicitarPermisoNotificaciones()
     } else {
       data.notification = false
-      
+
     }
     updateLocalStorage()
   })
@@ -1459,7 +1594,7 @@
       timer = setInterval(updateTimer, 1000);
       play_timer.innerText = 'Pause'
     } else {
-        pauseTimer()
+      pauseTimer()
     }
   }
 
@@ -1471,8 +1606,8 @@
     pomodoro_button.classList.remove('active');
     shortBreak_button.classList.remove('active');
     longBreak_button.classList.remove('active');
-    
-    
+
+
 
     if (mode === MODES.pomodoro) {
       min = Number(data.times.pomodoro)
@@ -1484,8 +1619,8 @@
       const percentage = (time / (data.times[mode] * 60)) * 100
       conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
     }
-    
-    if (mode === MODES.shortBreak) {    
+
+    if (mode === MODES.shortBreak) {
       min = Number(data.times.shortBreak)
       timeMode = MODES.shortBreak
       shortBreak_button.classList.add('active')
@@ -1514,12 +1649,12 @@
     if (min === 0 && sec === 0) {
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
-        data.pomodoros ++
+        data.pomodoros++
         updateLocalStorage()
         pomodoro_button.innerText = 'Pomodoro ' + data.pomodoros
         const firstChildTasks = tasks.firstElementChild
-        const taskObj = data.tasks.find(t => t.id === firstChildTasks.id) 
-        if (taskObj) {taskObj.pomodoros_completed ++}
+        const taskObj = data.tasks.find(t => t.id === firstChildTasks.id)
+        if (taskObj) { taskObj.pomodoros_completed++ }
         if (firstChildTasks) {
           const pomodorosCompletedTask = document.querySelector(`#${firstChildTasks.id}`).querySelector('.pomodoros-completed')
           pomodorosCompletedTask.innerText = taskObj.pomodoros_completed + '/' + taskObj.pomodoros_estimated
@@ -1548,23 +1683,23 @@
         } else {
           selectMode(MODES.longBreak)
         }
-        if (data.autoStart && data.tasks.length !== 0 ) {
+        if (data.autoStart && data.tasks.length !== 0) {
           startTimer()
         }
         notificarUsuario()
         // alert("You're done, it's time for a break")
       }
       else if (timeMode === MODES.shortBreak) {
-        data.shortBreaks ++
+        data.shortBreaks++
         updateLocalStorage()
-        shortBreak_button.innerText = 'Descanso corto ' + data.shortBreaks 
+        shortBreak_button.innerText = 'Descanso corto ' + data.shortBreaks
         selectMode(MODES.pomodoro)
         if (data.autoStart) {
           startTimer()
         }
       }
-      else if (timeMode === MODES.longBreak ) {
-        data.longBreaks ++
+      else if (timeMode === MODES.longBreak) {
+        data.longBreaks++
         updateLocalStorage()
         longBreak_button.innerText = 'Descanso largo ' + data.longBreaks
         selectMode(MODES.pomodoro)
@@ -1588,7 +1723,7 @@
       const percentage = (time / (data.times[mode] * 60)) * 100
       console.log(time, 'time', mode)
       conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
-      
+
     }
   }
 
@@ -1621,29 +1756,29 @@
       trash_btn.style = 'display: flex'
     } else {
       trash_btn.style = 'display: none'
-    } 
+    }
   }
 
   function solicitarPermisoNotificaciones() {
     if (Notification.permission !== 'granted') {
-        Notification.requestPermission().then((permiso) => {
-            if (permiso === 'granted') {
-                console.log('Permiso concedido');
-            }
-        });
+      Notification.requestPermission().then((permiso) => {
+        if (permiso === 'granted') {
+          console.log('Permiso concedido');
+        }
+      });
     } else {
       console.log(Notification)
     }
-}
+  }
 
-// Llamar a la función cuando se cargue la página
-// solicitarPermisoNotificaciones();
-function notificarUsuario() {
+  // Llamar a la función cuando se cargue la página
+  // solicitarPermisoNotificaciones();
+  function notificarUsuario() {
     if (Notification.permission === 'granted' && data.notification) {
-        new Notification('¡Tiempo terminado!', {
-            body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
-        });
+      new Notification('¡Tiempo terminado!', {
+        body: 'El pomodoro ha finalizado. ¡Hora de descansar!',
+      });
     }
-}
+  }
 
 </script>
