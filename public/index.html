@@ -143,8 +143,6 @@
           <strong>distraerte</strong>.
         </p>
       </section>
-    </div>
-    <div>
       <section>
         <h2>🎯 ¿Qué es el Método Pomodoro y por qué es tan efectivo?</h2>
         <p>El <strong>Método Pomodoro</strong> divide tu trabajo en sesiones de <strong>25 minutos</strong> seguidas de
@@ -152,10 +150,9 @@
             mental</strong>. Numerosos estudios han demostrado que este sistema reduce la
           <strong>procrastinación</strong> y mejora el <strong>rendimiento</strong>.
         </p>
-
       </section>
     </div>
-    <div>
+    <div id="last-container">
       <section>
         <h2>🔥 Funciones Clave de Nuestra App Pomodoro:</h2>
         <ul>
@@ -166,10 +163,7 @@
           <!-- <li>✔️ <strong>Modo oscuro</strong> para cuidar tu vista 🌙</li> -->
           <li>✔️ <strong>Notificaciones</strong> para recordarte tus descansos ⏰</li>
         </ul>
-
       </section>
-    </div>
-    <div id="last-container">
       <section>
         <h2>🚀 Aumenta tu Productividad con el Mejor Temporizador Pomodoro Online</h2>
         <p>Ya seas <strong>estudiante</strong>, <strong>programador</strong>, <strong>escritor</strong> o simplemente
@@ -343,8 +337,18 @@
     display: grid;
     justify-items: center;
     scroll-behavior: smooth;
+    gap: 50px;
     /* display: flex;
     flex-direction: column; */
+
+    div {
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      display: flex;
+      flex-direction: column;
+
+    }
 
     p {
       margin: 0;
@@ -385,8 +389,8 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 1000px;
-    margin-top: 100px;
+    /* max-width: 1000px; */
+    /* margin-top: 100px; */
     padding-inline: 30px;
 
     ul {
@@ -395,6 +399,7 @@
     }
 
     p {
+      padding-left: 12px;
       font-size: 1.1rem;
       /* Tamaño de fuente ligeramente más grande */
       max-width: 700px;
@@ -1036,26 +1041,28 @@
       /* flex-direction: row;
       */
       /* align-items: stretch; */
+
       height: 100vh;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
     }
 
     main>div {
+      padding-top: 9rem;
       height: 100vh;
       scroll-snap-align: start;
       display: grid;
       place-content: center;
-      max-width: 600px;
+      max-width: 576px;
+
       /* gap: 50px; */
       font-size: larger;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
       gap: 60px;
-      /* width: 60%; */
-      max-width: 550px;
+
 
       section {
 
@@ -1104,31 +1111,11 @@
     .first-container {
       flex-direction: row;
       margin-top: 0px;
+      padding: 0px;
       gap: 20px;
       scroll-snap-align: start;
-
-    }
-
-    .second-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      gap: 30px;
-      /* width: 60%; */
-      max-width: 550px;
-
-      section {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        ul {
-          padding: none;
-          margin: none;
-          list-style: none;
-        }
-      }
+      align-items: center;
     }
   }
 
@@ -1193,7 +1180,7 @@
 
   function updateLocalStorage() {
     window.localStorage.setItem('pomoData', JSON.stringify(data))
-    console.log(data)
+
   }
   function generateId() {
     const part1 = Date.now().toString(35)
@@ -1201,7 +1188,6 @@
     return part1 + part2
   }
   const miStorage = JSON.parse(window.localStorage.getItem('pomoData'))
-  console.log(miStorage)
 
 
 
@@ -1243,14 +1229,12 @@
     els.forEach((task) => {
       const { top } = task.getBoundingClientRect()
       const offset = mouseY - top
-      // console.log(top, offset)
       if (offset < 0 && offset > closestOffset) {
         closestOffset = offset;
         closestTask = task;
       }
     });
 
-    // console.log(closestTask)
     return closestTask;
   }
 
@@ -1291,17 +1275,11 @@
         pomodorosSpan.style = 'display: flex'
         li.classList.remove('isEditTask')
         const oldTask = data.tasks.find(t => t.id === li.id) ?? false
-        // console.log(li.id, oldTask.id, taskInput.value)
         if (oldTask !== false && oldTask.task !== taskInput.value) {
-          // console.log(oldTask.task)
           oldTask.task = taskInput.value
-          console.log(oldTask.task)
-          console.log(data)
           updateLocalStorage()
         }
         if (oldTask !== false && parseInt(oldTask.pomodoros_completed) !== parseInt(pomodorosCompletedInput.value) || oldTask !== false && parseInt(oldTask.pomodoros_estimated) !== parseInt(pomodorosEstimatedInput.value)) {
-          console.log(oldTask.pomodoros_completed, parseInt(pomodorosCompletedInput.value), 'pomodoros completed')
-          console.log(oldTask.pomodoros_estimated, parseInt(pomodorosEstimatedInput.value), 'pomodoros estimated')
           oldTask.pomodoros_completed = parseInt(pomodorosCompletedInput.value)
           oldTask.pomodoros_estimated = parseInt(pomodorosEstimatedInput.value)
           pomodorosSpan.textContent = `${pomodorosCompletedInput.value}/${pomodorosEstimatedInput.value}`
@@ -1326,7 +1304,6 @@
     })
 
     optionsButton.addEventListener('click', (e) => {
-      console.log(deleteButton.style.display)
       if (deleteButton.style.display === "none" && editBtn.style.display === 'none') {
         deleteButton.style.display = 'inline'
         editBtn.style.display = 'inline'
@@ -1451,7 +1428,6 @@
   let isRunning;
 
   if (window.localStorage.getItem('pomoData')) {
-    console.log(miStorage)
     data.times = miStorage.times
     data.autoStart = miStorage.autoStart
     data.checked = miStorage.checked
@@ -1491,10 +1467,8 @@
     mapTasks(data.tasks)
     mapTasks(data.checked)
   } else {
-    console.log('crear data')
     try {
       window.localStorage.setItem('pomoData', JSON.stringify(data))
-      console.log('LocalStorageCreated')
     } catch (error) {
       console.error(error)
     }
@@ -1507,7 +1481,6 @@
     const text_input = document.getElementById('text-input')
     const newValue = text_input.value
     const estimatedPomo = Number(pomodoros_estimated.value)
-    console.log(estimatedPomo)
     const task = {
       id: generateId(),
       task: newValue,
@@ -1520,7 +1493,6 @@
       createTask(task)
 
       data.tasks.push(task)
-      console.log(data.tasks)
       updateLocalStorage()
 
 
@@ -1646,7 +1618,6 @@
   }
 
   function updateTimer() {
-    console.log(min, sec)
     if (min === 0 && sec === 0) {
       // selectMode(MODES.shortBreak)
       if (timeMode === MODES.pomodoro) {
@@ -1661,7 +1632,6 @@
           pomodorosCompletedTask.innerText = taskObj.pomodoros_completed + '/' + taskObj.pomodoros_estimated
           updateLocalStorage()
           pomodoro_button.innerText = 'Pomodoro ' + data.pomodoros
-          console.log(taskObj.pomodoros_completed, taskObj.pomodoros_estimated)
         }
 
         if (taskObj && taskObj.pomodoros_completed === taskObj.pomodoros_estimated) {
@@ -1722,7 +1692,6 @@
       let time = min * 60 + sec;
       const mode = timeMode === MODES.pomodoro ? 'pomodoro' : timeMode === MODES.shortBreak ? 'shortBreak' : 'longBreak'
       const percentage = (time / (data.times[mode] * 60)) * 100
-      console.log(time, 'time', mode)
       conicGradientTimer.style.background = `conic-gradient(var(--secondary-color) ${percentage}%, transparent 0%)`;
 
     }
