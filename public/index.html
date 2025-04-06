@@ -134,15 +134,18 @@
 
     <div class="second-container">
       <section>
-        <h1>⏳Temporizador Pomodoro Online – Mejora tu Productividad con el Mejor Reloj Pomodoro</h1>
+        <h2>⏳Mejora tu Productividad con el Mejor Reloj Pomodoro</h2>
 
         <p>¿Sientes que el <strong>tiempo</strong> se te escapa sin lograr terminar tus tareas? Nuestra <strong>app de
-            Pomodoro gratuita</strong> te ayuda a <strong>enfocarte</strong>, <strong>organizarte</strong> y aumentar tu
+            Pomodoro gratuita</strong> te ayuda a <strong>enfocarte</strong>, <strong>organizarte</strong> y aumentar
+          tu
           <strong>productividad</strong>. Con un <strong>temporizador Pomodoro online</strong> y una <strong>lista de
             tareas editable</strong>, podrás gestionar mejor tu <strong>tiempo</strong> y completar tus proyectos sin
           <strong>distraerte</strong>.
         </p>
       </section>
+    </div>
+    <div>
       <section>
         <h2>🎯 ¿Qué es el Método Pomodoro y por qué es tan efectivo?</h2>
         <p>El <strong>Método Pomodoro</strong> divide tu trabajo en sesiones de <strong>25 minutos</strong> seguidas de
@@ -152,7 +155,7 @@
         </p>
       </section>
     </div>
-    <div id="last-container">
+    <div>
       <section>
         <h2>🔥 Funciones Clave de Nuestra App Pomodoro:</h2>
         <ul>
@@ -164,6 +167,8 @@
           <li>✔️ <strong>Notificaciones</strong> para recordarte tus descansos ⏰</li>
         </ul>
       </section>
+    </div>
+    <div id="last-container">
       <section>
         <h2>🚀 Aumenta tu Productividad con el Mejor Temporizador Pomodoro Online</h2>
         <p>Ya seas <strong>estudiante</strong>, <strong>programador</strong>, <strong>escritor</strong> o simplemente
@@ -174,6 +179,7 @@
 
         <h3>✨ ¡Pruébalo ahora gratis y revoluciona tu forma de trabajar! ✨</h3>
       </section>
+
     </div>
     <footer>
       <a href="https://github.com/imDorian/pomodorotimer" target="_blank" rel="noopener noreferrer">Desarrollado por
@@ -376,10 +382,6 @@
 
   #last-container {
     margin-bottom: 300px;
-
-    h3 {
-      padding-top: 50px;
-    }
   }
 
   main div section {
@@ -389,6 +391,8 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    max-width: 576px;
+
     /* max-width: 1000px; */
     /* margin-top: 100px; */
     padding-inline: 30px;
@@ -398,11 +402,44 @@
       /* padding-left: 0px; */
     }
 
-    p {
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    h3 {
+      /* margin-top: 80px; */
+      text-align: center;
+      padding: 0;
+      padding-block: 10px;
+      padding-inline: 10px;
+      margin: 0;
+      color: var(--primary-color);
+      border-radius: 16px;
+      background-color: var(--article-color);
+      margin-top: 50px;
+    }
+
+    p,
+    ul {
       padding-left: 12px;
-      font-size: 1.1rem;
+      /* font-size: 1.1rem; */
       /* Tamaño de fuente ligeramente más grande */
       max-width: 700px;
+
+      border-radius: 16px;
+      background-color: var(--article-color);
+      padding: 20px;
+
+      strong {
+        color: var(--primary-color);
+      }
+
+
+
       /* Evita líneas demasiado largas */
 
       /* Alineación justificada para una apariencia más ordenada */
@@ -1038,19 +1075,20 @@
 
   @media screen and (min-width: 900px) {
     main {
+      /* padding-top: 120px; */
       /* flex-direction: row;
       */
       /* align-items: stretch; */
 
-      height: 100vh;
+      /* height: 100vh; */
       overflow-y: scroll;
-      scroll-snap-type: y mandatory;
+      /* scroll-snap-type: proximity */
     }
 
     main>div {
-      padding-top: 7rem;
-      height: 100vh;
-      scroll-snap-align: start;
+      /* padding-top: 7rem; */
+      /* height: 100vh; */
+      /* scroll-snap-align: center; */
       display: grid;
       place-content: center;
       max-width: 576px;
@@ -1089,13 +1127,7 @@
         }
       }
 
-      h3 {
-        /* margin-top: 80px; */
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        /* margin-top: 50px; */
-      }
+
     }
 
     .timer-container {
@@ -1116,6 +1148,8 @@
       scroll-snap-align: start;
       justify-content: center;
       align-items: center;
+      scroll-snap-align: center;
+      height: 100dvh;
     }
   }
 
